@@ -91,7 +91,7 @@
                                     <h2 class="mb-4">Make your Financial Report with Proferan</h2>
                                     <p class="text-white-50 home-desc font-16 mb-5">Proferan is a WebApp that helps MSMEs to create simple financial reports. Proferan also provides education to MSMEs about accounting applications.</p>
                                     <div class="watch-video mt-5">
-                                        <a href="#" class="btn btn-custom mr-4">Get Started <i class="mdi mdi-chevron-right ml-1"></i></a>
+                                        <a href="{{ route('auth.login.view') }}" class="btn btn-custom mr-4">Get Started <i class="mdi mdi-chevron-right ml-1"></i></a>
                                     </div>
     
                                 </div>
