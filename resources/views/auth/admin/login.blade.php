@@ -1,6 +1,6 @@
 @extends('auth.templates.main')
 @section('title')
-    Log in
+    Admin Log in
 @endsection
 @section('content')
     <div class="account-pages mt-5 mb-5">
@@ -22,16 +22,33 @@
                                 <h4 class="text-uppercase mt-0">Admin Sign In</h4>
                             </div>
 
-                            <form action="#">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <strong>Error!</strong> <br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    <strong>Success!</strong> <br>
+                                    <span>{{ session('success') }}</span>
+                                </div>
+                            @endif
 
+                            <form action="{{ route('auth.admin.login') }}" method="POST">
+                                @csrf
                                 <div class="form-group mb-3">
                                     <label for="email">Email address</label>
-                                    <input class="form-control" type="email" id="email" required placeholder="Enter your email" name="email">
+                                    <input class="form-control" type="email" id="email" required placeholder="Enter your email" name="email" value="{{ old('email') }}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="password">Password</label>
-                                    <input class="form-control" type="password" required id="password" placeholder="Enter your password" name="password">
+                                    <input class="form-control" type="password" required id="password" placeholder="Enter your password" name="password" value="{{ old('password') }}">
                                 </div>
 
                                 <div class="form-group mb-0 text-center">

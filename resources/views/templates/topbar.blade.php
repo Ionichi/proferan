@@ -141,13 +141,23 @@
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
-                <form action="{{ route('auth.logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="dropdown-item notify-item">
-                        <i class="fe-log-out"></i>
-                        <span>Logout</span>
-                    </button>
-                </form>
+                @if (Auth::guard('admin')->check())
+                    <form action="{{ route('auth.admin.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item notify-item">
+                            <i class="fe-log-out"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('auth.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item notify-item">
+                            <i class="fe-log-out"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                @endif
             </div>
         </li>
 
