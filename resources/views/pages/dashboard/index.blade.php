@@ -251,7 +251,7 @@
                         <div class="card-box widget-user">
                             <div class="media">
                                 <div class="avatar-lg mr-3">
-                                    <img src="assets/images/users/user-3.jpg" class="img-fluid rounded-circle" alt="user">
+                                    <img src="{{ asset('assets/images/users/user-3.jpg') }}" class="img-fluid rounded-circle" alt="user">
                                 </div>
                                 <div class="media-body overflow-hidden">
                                     <h5 class="mt-0 mb-1">Chadengle</h5>
@@ -266,7 +266,7 @@
                         <div class="card-box widget-user">
                             <div class="media">
                                 <div class="avatar-lg mr-3">
-                                    <img src="assets/images/users/user-2.jpg" class="img-fluid rounded-circle" alt="user">
+                                    <img src="{{ asset('assets/images/users/user-2.jpg') }}" class="img-fluid rounded-circle" alt="user">
                                 </div>
                                 <div class="media-body overflow-hidden">
                                     <h5 class="mt-0 mb-1"> Michael Zenaty</h5>
@@ -281,7 +281,7 @@
                         <div class="card-box widget-user">
                             <div class="media">
                                 <div class="avatar-lg mr-3">
-                                    <img src="assets/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="user">
+                                    <img src="{{ asset('assets/images/users/user-1.jpg') }}" class="img-fluid rounded-circle" alt="user">
                                 </div>
                                 <div class="media-body overflow-hidden">
                                     <h5 class="mt-0 mb-1">Stillnotdavid</h5>
@@ -296,7 +296,7 @@
                         <div class="card-box widget-user">
                             <div class="media">
                                 <div class="avatar-lg mr-3">
-                                    <img src="assets/images/users/user-10.jpg" class="img-fluid rounded-circle" alt="user">
+                                    <img src="{{ asset('assets/images/users/user-10.jpg') }}" class="img-fluid rounded-circle" alt="user">
                                 </div>
                                 <div class="media-body overflow-hidden">
                                     <h5 class="mt-0 mb-1">Tomaslau</h5>
@@ -336,7 +336,7 @@
                                 
                                 <div class="inbox-item">
                                     <a href="#">
-                                        <div class="inbox-item-img"><img src="assets/images/users/user-1.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img src="{{ asset('assets/images/users/user-1.jpg') }}" class="rounded-circle" alt=""></div>
                                         <h5 class="inbox-item-author mt-0 mb-1">Chadengle</h5>
                                         <p class="inbox-item-text">Hey! there I'm available...</p>
                                         <p class="inbox-item-date">13:40 PM</p>
@@ -345,7 +345,7 @@
                                 
                                 <div class="inbox-item">
                                     <a href="#">
-                                        <div class="inbox-item-img"><img src="assets/images/users/user-2.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img src="{{ asset('assets/images/users/user-2.jpg') }}" class="rounded-circle" alt=""></div>
                                         <h5 class="inbox-item-author mt-0 mb-1">Tomaslau</h5>
                                         <p class="inbox-item-text">I've finished it! See you so...</p>
                                         <p class="inbox-item-date">13:34 PM</p>
@@ -354,7 +354,7 @@
 
                                 <div class="inbox-item">
                                         <a href="#">
-                                        <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img src="{{ asset('assets/images/users/user-3.jpg') }}" class="rounded-circle" alt=""></div>
                                         <h5 class="inbox-item-author mt-0 mb-1">Stillnotdavid</h5>
                                         <p class="inbox-item-text">This theme is awesome!</p>
                                         <p class="inbox-item-date">13:17 PM</p>
@@ -363,7 +363,7 @@
 
                                 <div class="inbox-item">
                                     <a href="#">
-                                        <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img src="{{ asset('assets/images/users/user-4.jpg') }}" class="rounded-circle" alt=""></div>
                                         <h5 class="inbox-item-author mt-0 mb-1">Kurafire</h5>
                                         <p class="inbox-item-text">Nice to meet you</p>
                                         <p class="inbox-item-date">12:20 PM</p>
@@ -372,7 +372,7 @@
 
                                 <div class="inbox-item">
                                     <a href="#">
-                                        <div class="inbox-item-img"><img src="assets/images/users/user-5.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img src="{{ asset('assets/images/users/user-5.jpg') }}" class="rounded-circle" alt=""></div>
                                         <h5 class="inbox-item-author mt-0 mb-1">Shahedk</h5>
                                         <p class="inbox-item-text">Hey! there I'm available...</p>
                                         <p class="inbox-item-date">10:15 AM</p>

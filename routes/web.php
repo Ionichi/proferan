@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 // Authentication
-Route::prefix('auth')->group(function() {
+Route::prefix('auth')->middleware('guest')->group(function() {
     Route::get('/login', [LoginController::class, 'index'])->name('auth.login.view');
     Route::post('/login', [LoginController::class, 'login'])->name('auth.login');
 
@@ -43,10 +43,10 @@ Route::middleware('auth')->group(function() {
 
 
 // Admin Panel
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
     Route::post('/logout', [LoginController::class, 'logout_admin'])->name('auth.admin.logout');
 
     Route::get('/dashboard', function() {
         return view('pages.dashboard.index');
     });
-})->middleware('auth:admin');
+});
