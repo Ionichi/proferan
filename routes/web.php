@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,3 +51,5 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
         return view('pages.dashboard.index');
     });
 });
+
+Route::get('/pemasukkan', [FormController::class, 'pemasukkan'])->name('form.pemasukkan');
