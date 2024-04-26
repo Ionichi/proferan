@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Pemasukan</title>
+    <title>Formulir Pengeluaran</title>
     <!-- Include CSS libraries for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Include JavaScript libraries for functionality -->
@@ -161,7 +161,7 @@
                                 <p>Inputan diisi ketika memperoleh potongan atas pembelian. Centang apabila terdapat potongan dan lakukan pengisian!</p>
                                 <div class="text-start">
                                     <h6>Contoh:</h6>
-                                    <p>Membeli barang dagang sejumlah Rp100.000 secara tunai dengan potongan Rp20.000. Maka input di nominal adalah 100000 dan input di potongan adalah 20000.</p>
+                                    <p>Membeli barang dagang sejumlah Rp100.000 secara tunai dan diberikan potongan Rp20.000. Maka input di nominal adalah 100000 dan input di potongan adalah 20000.</p>
                                 </div>
                             </div>
                             <div class="modal-footer">

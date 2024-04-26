@@ -54,3 +54,5 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
 
 Route::get('/pemasukkan', [FormController::class, 'pemasukkan'])->name('form.pemasukkan');
 Route::get('/pengeluaran', [FormController::class, 'pengeluaran'])->name('form.pemasukkan');
+Route::get('/utang', [FormController::class, 'utang'])->name('form.utang');
+Route::get('/piutang', [FormController::class, 'piutang'])->name('form.piutang');

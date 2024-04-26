@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Pemasukan</title>
+    <title>Formulir Piutang</title>
     <!-- Include CSS libraries for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Include JavaScript libraries for functionality -->
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body {
-            background-image: url('/assets/images/form/backform.jpg');
+            background-image: url('/assets/images/form/pengeluaran.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -34,7 +34,7 @@
 <body>
     <div class="container col-lg-6">
         <div class="text-center">
-            <h1>Form Pemasukkan</h1>
+            <h1>Form Piutang</h1>
         </div>
         <form id="form-pemasukan">
             <div class="form-group mb-3">
@@ -50,7 +50,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
-                                <p>Inputan jenis transaksi penerimaan kas secara tunai, yang paling mendekati berdasarkan dengan keterangan yang telah disediakan</p>
+                                <p>Inputan kondisi piutang pada usaha, yang paling mendekati berdasarkan dengan keterangan yang telah disediakan</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -59,14 +59,9 @@
                     </div>
                 </div>
                 <select class="form-control" id="jenis-transaksi" name="jenis-transaksi">
-                    <option value="pendapatan-penjualan">Pendapatan Penjualan</option>
-                    <option value="beban-angkut-penjualan">Beban Angkut Penjualan</option>
-                    <option value="penerimaan-piutang">Penerimaan Piutang</option>
-                    <option value="pendapatan-bunga">Pendapatan Bunga</option>
-                    <option value="retur-pembelian">Retur Pembelian (pembelian tunai)</option>
-                    <option value="pendapatan-usaha-lain">Pendapatan Usaha Lain</option>
-                    <option value="pendapatan-lain-lain">Pendapatan Lain-lain</option>
-                    <option value="penambahan-modal">Penambahan Modal</option>
+                    <option value="piutang-usaha">Piutang Usaha</option>
+                    <option value="beban-angkut-penjualan-kredit">Beban Angkut Penjualan Kredit</option>
+                    <option value="retur-penjualan-kredit">Retur Penjualan Kredit</option>
                 </select>
             </div>
             <div class="form-group mb-3">
@@ -151,10 +146,10 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
-                                <p>Inputan diisi ketika memperoleh potongan atas penjualan. Potongan ini akan mempengaruhi pendapatan usaha anda yang berkurang. Centang apabila terdapat potongan dan lakukan pengisian!</p>
+                                <p>Inputan diisi ketika memperoleh potongan atas piutang. Centang apabila terdapat potongan dan lakukan pengisian!</p>
                                 <div class="text-start">
                                     <h6>Contoh:</h6>
-                                    <p>Terjual sejumlah Rp100.000 secara tunai dan diperoleh potongan Rp20.000. Maka input di nominal adalah 100000 dan input di potongan adalah 20000.</p>
+                                    <p>Menjual barang dagang sejumlah Rp100.000 secara kredit dan diberikan potongan Rp20.000. Maka input di nominal adalah 100000 dan input di potongan adalah 20000.</p>
                                 </div>
                             </div>
                             <div class="modal-footer">

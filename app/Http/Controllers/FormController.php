@@ -15,4 +15,14 @@ class FormController extends Controller
     {
         return view('/form/pengeluaran');
     }
+
+    public function utang()
+    {
+        return view('/form/utang');
+    }
+
+    public function piutang()
+    {
+        return view('/form/piutang');
+    }
 }
