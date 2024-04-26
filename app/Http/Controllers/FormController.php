@@ -10,4 +10,9 @@ class FormController extends Controller
     public function pemasukkan(){
         return view('/form/pemasukkan');
     }
+
+    public function pengeluaran()
+    {
+        return view('/form/pengeluaran');
+    }
 }
