@@ -11,4 +11,9 @@ class Transaksi extends Model
     use HasFactory, HasUuids;
     protected $table = 'transaksi';
     protected $guarded = [''];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
