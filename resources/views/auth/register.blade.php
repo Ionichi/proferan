@@ -42,7 +42,7 @@
                             <form action="{{ route('auth.register') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="fullname">Company Name / Owner</label>
+                                    <label for="fullname">Company Name</label>
                                     <input class="form-control" type="text" id="fullname" placeholder="Enter your name" required name="fullname" value="{{ old('fullname') }}">
                                 </div>
                                 <div class="form-group">

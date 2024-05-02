@@ -10,5 +10,5 @@ class RekapDataAkun extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'rekap_data_akun';
-    protected $guard = [];
+    protected $guarded = [''];
 }

@@ -10,5 +10,5 @@ class LogError extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'log_errors';
-    protected $guard = [];
+    protected $guarded = [''];
 }

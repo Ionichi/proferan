@@ -10,5 +10,5 @@ class MasterJenisAkun extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'master_jenis_akun';
-    protected $guard = [];
+    protected $guarded = [''];
 }

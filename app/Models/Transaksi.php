@@ -10,5 +10,5 @@ class Transaksi extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'transaksi';
-    protected $guard = [];
+    protected $guarded = [''];
 }

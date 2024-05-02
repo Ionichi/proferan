@@ -10,5 +10,5 @@ class MasterAkun extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'master_akun';
-    protected $guard = [];
+    protected $guarded = [''];
 }
