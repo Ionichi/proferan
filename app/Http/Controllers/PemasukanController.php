@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MasterAkun;
 use App\Models\Transaksi;
 use App\Services\ModuleService;
 use Illuminate\Http\Request;
@@ -35,6 +36,14 @@ class PemasukanController extends BaseController
             ->addIndexColumn()
             ->editColumn('tgl', function($data) {
                 return Carbon::parse($data->tgl)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->format('d F Y');
+            })
+            ->editColumn('nomor_akun_debit', function($data) {
+                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $data->nomor_akun_debit)->first();
+                return $akun->nama;
+            })
+            ->editColumn('nomor_akun_kredit', function ($data) {
+                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $data->nomor_akun_kredit)->first();
+                return $akun->nama;
             })
             ->editColumn('nominal_debit', function($data) {
                 return "Rp " . number_format($data->nominal_debit);

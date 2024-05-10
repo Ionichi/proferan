@@ -3,7 +3,7 @@
     Dashboard    
 @endsection
 @section('content')
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
 
         <div class="row">
 
@@ -471,13 +471,13 @@
         </div>
         <!-- end row -->       
         
-    </div>
+    </div> --}}
 @endsection
 @section('scripts')
     <!--Morris Chart-->
-    <script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script> --}}
 
     <!-- Dashboard init js-->
-    <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script> --}}
 @endsection
