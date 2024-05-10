@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,12 @@ Route::middleware('auth')->group(function() {
     Route::get('/dashboard', function() {
         return view('pages.dashboard.index');
     });
+
+    Route::get('/pemasukan', [PemasukanController::class, 'index'])->name('pemasukan.view');
+    Route::get('/pemasukan/table', [PemasukanController::class, 'table'])->name('pemasukan.table');
+    Route::post('/pemasukan', [PemasukanController::class, 'createUpdate'])->name('pemasukan.createUpdate');
+    Route::get('/pemasukan/edit/{id}', [PemasukanController::class, 'edit'])->name('pemasukan.edit');
+    Route::post('/pemasukan/destroy', [PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
 });
 
 
