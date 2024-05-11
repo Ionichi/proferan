@@ -131,7 +131,6 @@ class ModuleService
                     $akunBaru->save();
                 }
 
-
                 if($request->has('potongan')) {
                     if($potongan) {
                         $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
@@ -170,13 +169,14 @@ class ModuleService
                 }
                 else {
                     $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
-                    $akunPot->nominal -= $potongan->nominal_debit;
-
                     $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                    $akunKasPot->nominal += $potongan->nominal_kredit;
+                    if($potongan) {
+                        $akunPot->nominal -= $potongan->nominal_debit;
+    
+                        $akunKasPot->nominal += $potongan->nominal_kredit;
 
-                    if($potongan)
                         $potongan->delete();
+                    }
                 }
                 $akunPot->save();
                 $akunKasPot->save();
