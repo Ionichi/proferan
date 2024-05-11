@@ -66,15 +66,21 @@
                     </a>
                 </li>
                 <li>
-                    <a href="calendar.html">
+                    <a href="#">
                         <i class="fas fa-balance-scale"></i>
-                        <span> Utang </span>
+                        <span> Utang (Coming Soon) </span>
                     </a>
                 </li>
                 <li>
-                    <a href="calendar.html">
+                    <a href="#">
                         <i class="fas fa-hand-holding-usd"></i>
-                        <span> Piutang </span>
+                        <span> Piutang (Coming Soon) </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-edit"></i>
+                        <span> Penyesuaian (Coming Soon) </span>
                     </a>
                 </li>
             </ul>

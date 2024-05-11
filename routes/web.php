@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UtangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,8 @@ Route::middleware('auth')->group(function() {
     Route::post('/pengeluaran', [PengeluaranController::class, 'createUpdate'])->name('pengeluaran.createUpdate');
     Route::get('/pengeluaran/edit/{id}', [PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
     Route::post('/pengeluaran/destroy', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
+
+    Route::get('/utang', [UtangController::class, 'index'])->name('utang.view');
 });
 
 
