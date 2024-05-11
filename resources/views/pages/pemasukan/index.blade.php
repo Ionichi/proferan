@@ -41,15 +41,15 @@
                     <br><br><br>
                     <table id="tablePemasukan" class="table table-bordered dt-responsive nowrap table-striped" width="100%">
                         <thead class="thead-dark">
-                            <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>No Akun (D)</th>
-                                <th>Nominal (D)</th>
-                                <th>No Akun (K)</th>
-                                <th>Nominal (K)</th>
-                                <th>Keterangan</th>
-                                <th>Action</th>
+                            <tr class="text-center">
+                                <th class="align-middle" style="max-width: 5%;">No</th>
+                                <th class="align-middle">Tanggal</th>
+                                <th class="align-middle">No Akun (D)</th>
+                                <th class="align-middle">Nominal (D)</th>
+                                <th class="align-middle">No Akun (K)</th>
+                                <th class="align-middle">Nominal (K)</th>
+                                <th class="align-middle">Keterangan</th>
+                                <th class="align-middle">Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -188,8 +188,14 @@
                     { data: 'action', name: 'action' },
                 ],
                 columnDefs: [
-                    { className: 'text-break', targets: [6] },
-                    { className: 'text-center', targets: [0, 1, 2, 3, 4, 5, 7] },
+                    { 
+                        render: function(data, type, full, meta) {
+                            return `<div class='text-wrap'>`+data+`</div>`;
+                        },
+                        targets: [2, 4, 6] 
+                    },
+                    { className: 'text-center', targets: [0, 1, 2, 4, 7] },
+                    { className: 'text-right', targets: [3, 5] },
                     { className: 'align-middle', targets: [0, 7] }
                 ]
             });
@@ -380,7 +386,6 @@
                 confirmButtonText: 'Ya, hapus data!',
             }).then((result) => {
                 if(result.value) {
-                    console.log(id);
                     $.ajax({
                         url: "{{ route('pemasukan.destroy') }}",
                         method: "POST",

@@ -45,15 +45,15 @@ Pengeluaran
                 <br><br><br>
                 <table id="tablePengeluaran" class="table table-bordered dt-responsive nowrap table-striped" width="100%">
                     <thead class="thead-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>No Akun (D)</th>
-                            <th>Nominal (D)</th>
-                            <th>No Akun (K)</th>
-                            <th>Nominal (K)</th>
-                            <th>Keterangan</th>
-                            <th>Action</th>
+                        <tr class="text-center">
+                            <th class="align-middle" style="max-width: 5%;">No</th>
+                            <th class="align-middle">Tanggal</th>
+                            <th class="align-middle">No Akun (D)</th>
+                            <th class="align-middle">Nominal (D)</th>
+                            <th class="align-middle">No Akun (K)</th>
+                            <th class="align-middle">Nominal (K)</th>
+                            <th class="align-middle">Keterangan</th>
+                            <th class="align-middle">Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -190,7 +190,7 @@ Pengeluaran
                 responsive: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('pemasukan.table') }}",
+                    url: "{{ route('pengeluaran.table') }}",
                     method: 'GET',
                     data: {
                         query: query,
@@ -207,8 +207,14 @@ Pengeluaran
                     { data: 'action', name: 'action' },
                 ],
                 columnDefs: [
-                    { className: 'text-break', targets: [6] },
-                    { className: 'text-center', targets: [0, 1, 2, 3, 4, 5, 7] },
+                    {
+                        render: function(data, type, full, meta) {
+                            return `<div class='text-wrap'>`+data+`</div>`;
+                        },
+                        targets: [2, 4, 6]
+                    },
+                    { className: 'text-center', targets: [0, 1, 2, 4, 7] },
+                    { className: 'text-right', targets: [3, 5] },
                     { className: 'align-middle', targets: [0, 7] }
                 ]
             });
@@ -273,7 +279,7 @@ Pengeluaran
         $("#formPengeluaran").submit(function(event) {
             event.preventDefault();
             $.ajax({
-                url: "{{ route('pemasukan.createUpdate') }}",
+                url: "{{ route('pengeluaran.createUpdate') }}",
                 method: 'POST',
                 data: new FormData(this),
                 contentType: false,
@@ -329,7 +335,7 @@ Pengeluaran
         $(document).on('click', '.btnEdit', function() {
             const id = $(this).attr('id');
             $.ajax({
-                url: `/pemasukan/edit/${id}`,
+                url: `/pengeluaran/edit/${id}`,
                 method: 'GET',
                 beforeSend: function() {
                     Swal.fire({
@@ -347,9 +353,9 @@ Pengeluaran
                         Swal.close();
                         resetForm();
                         $('#id').val(response.data.id);
-                        $('#jenis_transaksi').val(response.data.nomor_akun_kredit).trigger('change');
+                        $('#jenis_transaksi').val(response.data.nomor_akun_debit).trigger('change');
                         $('#tgl').val(response.data.tgl);
-                        $('#nominalTransaksi').val(response.data.nominal_debit);
+                        $('#nominalTransaksi').val(response.data.nominal_kredit);
                         $('#keterangan').text(response.data.keterangan);
                         // formatting
                         let inpNominal = document.getElementById('nominalTransaksi');
@@ -391,7 +397,7 @@ Pengeluaran
             const id = $(this).attr('id');
             Swal.fire({
                 title: 'Konfirmasi!',
-                text: 'Yakin ingin menghapus data pemasukan?',
+                text: 'Yakin ingin menghapus data pengeluaran?',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Batal',
@@ -399,9 +405,8 @@ Pengeluaran
                 confirmButtonText: 'Ya, hapus data!',
             }).then((result) => {
                 if(result.value) {
-                    console.log(id);
                     $.ajax({
-                        url: "{{ route('pemasukan.destroy') }}",
+                        url: "{{ route('pengeluaran.destroy') }}",
                         method: "POST",
                         data: {
                             id: id,

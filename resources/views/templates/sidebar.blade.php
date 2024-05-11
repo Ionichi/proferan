@@ -31,7 +31,7 @@
                 <li class="menu-title">Reports</li>
 
                 <li>
-                    <a href="/dasbboard">
+                    <a href="/dashboard">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span> Dashboard </span>
                     </a>

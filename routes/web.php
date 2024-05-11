@@ -49,6 +49,10 @@ Route::middleware('auth')->group(function() {
     Route::post('/pemasukan/destroy', [PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
 
     Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran.view');
+    Route::get('/pengeluaran/table', [PengeluaranController::class, 'table'])->name('pengeluaran.table');
+    Route::post('/pengeluaran', [PengeluaranController::class, 'createUpdate'])->name('pengeluaran.createUpdate');
+    Route::get('/pengeluaran/edit/{id}', [PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
+    Route::post('/pengeluaran/destroy', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
 });
 
 
