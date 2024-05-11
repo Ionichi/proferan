@@ -79,7 +79,6 @@
                             <select name="jenis_transaksi" id="jenis_transaksi" class="form-control" required>
                                 <option value="">-- Pilih Jenis Transaksi --</option>
                                 <option value="411">Pendapatan Penjualan</option>
-                                <option value="422">Pendapatan Angkut Penjualan</option>
                                 <option value="112">Penerimaan Piutang</option>
                                 <option value="421">Pendapatan Bunga</option>
                                 <option value="521">Retur Pembelian (Pembelian Tunai)</option>
