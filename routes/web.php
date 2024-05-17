@@ -56,6 +56,10 @@ Route::middleware('auth')->group(function() {
     Route::post('/pengeluaran/destroy', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
 
     Route::get('/utang', [UtangController::class, 'index'])->name('utang.view');
+    Route::get('/utang/table', [UtangController::class, 'table'])->name('utang.table');
+    Route::post('/utang', [UtangController::class, 'createUpdate'])->name('utang.createUpdate');
+    Route::get('/utang/edit/{id}', [UtangController::class, 'edit'])->name('utang.edit');
+    Route::post('/utang/destroy', [UtangController::class, 'destroy'])->name('utang.destroy');
 });
 
 

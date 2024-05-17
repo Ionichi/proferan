@@ -26,18 +26,18 @@ class ModuleService
                 $transaksi->type = $module;
                 $transaksi->save();
 
-                $akunKas = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                $akunKas->nominal += $request->nominal;
-                $akunKas->save();
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                $akunDebit->nominal += $request->nominal;
+                $akunDebit->save();
 
-                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
-                if($akun->saldo_normal == 'kredit') {
-                    $akun->nominal += $request->nominal;
-                    $akun->save();
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
+                if($akunKredit->saldo_normal == 'kredit') {
+                    $akunKredit->nominal += $request->nominal;
+                    $akunKredit->save();
                 }
                 else {
-                    $akun->nominal -= $request->nominal;
-                    $akun->save();
+                    $akunKredit->nominal -= $request->nominal;
+                    $akunKredit->save();
                 }
 
                 if($request->has('potongan')) {
@@ -52,12 +52,12 @@ class ModuleService
                     $transaksiPot->type = $module;
                     $transaksiPot->save();
 
-                    $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
-                    $akunPot->nominal += $request->potongan;
-                    $akunPot->save();
-                    $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                    $akunKasPot->nominal -= $request->potongan;
-                    $akunKasPot->save();
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
+                    $akunDebitPot->nominal += $request->potongan;
+                    $akunDebitPot->save();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                    $akunKreditPot->nominal -= $request->potongan;
+                    $akunKreditPot->save();
                 }
 
                 DB::commit();
@@ -95,17 +95,17 @@ class ModuleService
                 $transaksi->type = $module;
                 $transaksi->save();
 
-                $akunKas = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                $akunKas->nominal -= $request->nominal;
-                $akunKas->save();
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                $akunKredit->nominal -= $request->nominal;
+                $akunKredit->save();
 
-                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
-                if ($akun->saldo_normal == 'kredit') {
-                    $akun->nominal -= $request->nominal;
-                    $akun->save();
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
+                if ($akunDebit->saldo_normal == 'kredit') {
+                    $akunDebit->nominal -= $request->nominal;
+                    $akunDebit->save();
                 } else {
-                    $akun->nominal += $request->nominal;
-                    $akun->save();
+                    $akunDebit->nominal += $request->nominal;
+                    $akunDebit->save();
                 }
 
                 if ($request->has('potongan')) {
@@ -120,12 +120,12 @@ class ModuleService
                     $transaksiPot->type = $module;
                     $transaksiPot->save();
 
-                    $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunPot->nominal -= $request->potongan;
-                    $akunPot->save();
-                    $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                    $akunKasPot->nominal += $request->potongan;
-                    $akunKasPot->save();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunKreditPot->nominal -= $request->potongan;
+                    $akunKreditPot->save();
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                    $akunDebitPot->nominal += $request->potongan;
+                    $akunDebitPot->save();
                 }
 
                 DB::commit();
@@ -149,6 +149,84 @@ class ModuleService
                 ], 500);
             }
         }
+        else if ($module == 'utang') {
+            DB::beginTransaction();
+            try {
+                if ($request->jenis_transaksi === 511 || $request->jenis_transaksi === 512) {
+                    $nomor_akun_kredit = 211;
+                } else if ($request->jenis_transaksi === 211) {
+                    $nomor_akun_kredit = 521;
+                } else {
+                    $nomor_akun_kredit = 212;
+                }
+                $transaksi = new Transaksi();
+                $transaksi->user_id = Auth::user()->id;
+                $transaksi->tgl = $request->tgl;
+                $transaksi->nomor_akun_debit = $request->jenis_transaksi;
+                $transaksi->nominal_debit = $request->nominal;
+                $transaksi->nomor_akun_kredit = $nomor_akun_kredit;
+                $transaksi->nominal_kredit = $request->nominal;
+                $transaksi->keterangan = ucfirst($request->keterangan);
+                $transaksi->type = $module;
+                $transaksi->save();
+
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $nomor_akun_kredit)->firstOrFail();
+                if ($akunKredit->saldo_normal == 'kredit') {
+                    $akunKredit->nominal += $request->nominal;
+                } else {
+                    $akunKredit->nominal -= $request->nominal;
+                }
+                $akunKredit->save();
+
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
+                if ($akunDebit->saldo_normal == 'kredit') {
+                    $akunDebit->nominal -= $request->nominal;
+                } else {
+                    $akunDebit->nominal += $request->nominal;
+                }
+                $akunDebit->save();
+
+                if ($request->has('potongan')) {
+                    $transaksiPot = new Transaksi();
+                    $transaksiPot->user_id = Auth::user()->id;
+                    $transaksiPot->tgl = $request->tgl;
+                    $transaksiPot->nomor_akun_debit = 211;
+                    $transaksiPot->nominal_debit = $request->potongan;
+                    $transaksiPot->nomor_akun_kredit = 5211;
+                    $transaksiPot->nominal_kredit = $request->potongan;
+                    $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
+                    $transaksiPot->type = $module;
+                    $transaksiPot->save();
+
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
+                    $akunDebitPot->nominal -= $request->potongan;
+                    $akunDebitPot->save();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunKreditPot->nominal -= $request->potongan;
+                    $akunKreditPot->save();
+                }
+
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Berhasil menambahkan data utang!',
+                    'code' => 200,
+                ], 200);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                LogError::create([
+                    'user_id' => Auth::user()->id,
+                    'action' => 'Tambah Utang',
+                    'message' => $e,
+                ]);
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Gagal menambahkan data utang!',
+                    'code' => 500,
+                ], 500);
+            }
+        }
         else {
             return response()->json([
                 'status' => 'error',
@@ -166,48 +244,48 @@ class ModuleService
                 $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'pemasukan')->firstOrFail();
                 $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: ".$transaksi->keterangan)->where('type', 'pemasukan')->first();
 
-                $akunKas = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                $akunKas->nominal -= $transaksi->nominal_debit;
-                $akunKas->nominal += $request->nominal;
-                $akunKas->save();
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                $akunDebit->nominal -= $transaksi->nominal_debit;
+                $akunDebit->nominal += $request->nominal;
+                $akunDebit->save();
 
-                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_kredit)->firstOrFail();
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_kredit)->firstOrFail();
                 if($request->jenis_transaksi == $transaksi->nomor_akun_kredit) {
-                    if($akun->saldo_normal == 'kredit') {
-                        $akun->nominal -= $transaksi->nominal_kredit;
-                        $akun->nominal += $request->nominal;
+                    if($akunKredit->saldo_normal == 'kredit') {
+                        $akunKredit->nominal -= $transaksi->nominal_kredit;
+                        $akunKredit->nominal += $request->nominal;
                     } else {
-                        $akun->nominal += $transaksi->nominal_kredit;
-                        $akun->nominal -= $request->nominal;
+                        $akunKredit->nominal += $transaksi->nominal_kredit;
+                        $akunKredit->nominal -= $request->nominal;
                     }
-                    $akun->save();
+                    $akunKredit->save();
                 }
                 else {
-                    if($akun->saldo_normal == 'kredit') {
-                        $akun->nominal -= $transaksi->nominal_kredit;
+                    if($akunKredit->saldo_normal == 'kredit') {
+                        $akunKredit->nominal -= $transaksi->nominal_kredit;
                     } else {
-                        $akun->nominal += $transaksi->nominal_kredit;
+                        $akunKredit->nominal += $transaksi->nominal_kredit;
                     }
-                    $akun->save();
+                    $akunKredit->save();
 
-                    $akunBaru = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
-                    if ($akunBaru->saldo_normal == 'kredit') {
-                        $akunBaru->nominal += $request->nominal;
+                    $akunKreditBaru = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
+                    if ($akunKreditBaru->saldo_normal == 'kredit') {
+                        $akunKreditBaru->nominal += $request->nominal;
                     } else {
-                        $akunBaru->nominal -= $request->nominal;
+                        $akunKreditBaru->nominal -= $request->nominal;
                     }
-                    $akunBaru->save();
+                    $akunKreditBaru->save();
                 }
 
                 if($request->has('potongan')) {
                     if($potongan) {
-                        $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
-                        $akunPot->nominal -= $potongan->nominal_debit;
-                        $akunPot->nominal += $request->potongan;
+                        $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
+                        $akunDebitPot->nominal -= $potongan->nominal_debit;
+                        $akunDebitPot->nominal += $request->potongan;
     
-                        $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                        $akunKasPot->nominal += $potongan->nominal_kredit;
-                        $akunKasPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                        $akunKreditPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal -= $request->potongan;
 
                         $potongan->user_id = Auth::user()->id;
                         $potongan->tgl = $request->tgl;
@@ -228,26 +306,26 @@ class ModuleService
                         $transaksiPot->type = $module;
                         $transaksiPot->save();
 
-                        $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
-                        $akunPot->nominal += $request->potongan;
+                        $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
+                        $akunDebitPot->nominal += $request->potongan;
 
-                        $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                        $akunKasPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                        $akunKreditPot->nominal -= $request->potongan;
                     }
                 }
                 else {
-                    $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
-                    $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                     if($potongan) {
-                        $akunPot->nominal -= $potongan->nominal_debit;
+                        $akunDebitPot->nominal -= $potongan->nominal_debit;
     
-                        $akunKasPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal += $potongan->nominal_kredit;
 
                         $potongan->delete();
                     }
                 }
-                $akunPot->save();
-                $akunKasPot->save();
+                $akunDebitPot->save();
+                $akunKreditPot->save();
 
                 $transaksi->user_id = Auth::user()->id;
                 $transaksi->tgl = $request->tgl;
@@ -284,47 +362,47 @@ class ModuleService
                 $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'pengeluaran')->firstOrFail();
                 $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: " . $transaksi->keterangan)->where('type', 'pengeluaran')->first();
 
-                $akunKas = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                $akunKas->nominal += $transaksi->nominal_kredit;
-                $akunKas->nominal -= $request->nominal;
-                $akunKas->save();
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                $akunKredit->nominal += $transaksi->nominal_kredit;
+                $akunKredit->nominal -= $request->nominal;
+                $akunKredit->save();
 
-                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_debit)->firstOrFail();
-                if ($request->jenis_transaksi == $transaksi->nomor_akun_kredit) {
-                    if ($akun->saldo_normal == 'kredit') {
-                        $akun->nominal += $transaksi->nominal_debit;
-                        $akun->nominal -= $request->nominal;
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_debit)->firstOrFail();
+                if ($request->jenis_transaksi == $transaksi->nomor_akun_debit) {
+                    if ($akunDebit->saldo_normal == 'kredit') {
+                        $akunDebit->nominal += $transaksi->nominal_debit;
+                        $akunDebit->nominal -= $request->nominal;
                     } else {
-                        $akun->nominal -= $transaksi->nominal_debit;
-                        $akun->nominal += $request->nominal;
+                        $akunDebit->nominal -= $transaksi->nominal_debit;
+                        $akunDebit->nominal += $request->nominal;
                     }
-                    $akun->save();
+                    $akunDebit->save();
                 } else {
-                    if ($akun->saldo_normal == 'kredit') {
-                        $akun->nominal += $transaksi->nominal_kredit;
+                    if ($akunDebit->saldo_normal == 'kredit') {
+                        $akunDebit->nominal += $transaksi->nominal_debit;
                     } else {
-                        $akun->nominal -= $transaksi->nominal_kredit;
+                        $akunDebit->nominal -= $transaksi->nominal_debit;
                     }
-                    $akun->save();
+                    $akunDebit->save();
 
-                    $akunBaru = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
-                    if ($akunBaru->saldo_normal == 'kredit') {
-                        $akunBaru->nominal -= $request->nominal;
+                    $akunDebitBaru = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
+                    if ($akunDebitBaru->saldo_normal == 'kredit') {
+                        $akunDebitBaru->nominal -= $request->nominal;
                     } else {
-                        $akunBaru->nominal += $request->nominal;
+                        $akunDebitBaru->nominal += $request->nominal;
                     }
-                    $akunBaru->save();
+                    $akunDebitBaru->save();
                 }
 
                 if ($request->has('potongan')) {
                     if ($potongan) {
-                        $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                        $akunPot->nominal += $potongan->nominal_kredit;
-                        $akunPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                        $akunKreditPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal -= $request->potongan;
 
-                        $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                        $akunKasPot->nominal -= $potongan->nominal_debit;
-                        $akunKasPot->nominal += $request->potongan;
+                        $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                        $akunDebitPot->nominal -= $potongan->nominal_debit;
+                        $akunDebitPot->nominal += $request->potongan;
 
                         $potongan->user_id = Auth::user()->id;
                         $potongan->tgl = $request->tgl;
@@ -336,33 +414,33 @@ class ModuleService
                         $transaksiPot = new Transaksi();
                         $transaksiPot->user_id = Auth::user()->id;
                         $transaksiPot->tgl = $request->tgl;
-                        $transaksiPot->nomor_akun_debit = 5211;
+                        $transaksiPot->nomor_akun_debit = 111;
                         $transaksiPot->nominal_debit = $request->potongan;
-                        $transaksiPot->nomor_akun_kredit = 111;
+                        $transaksiPot->nomor_akun_kredit = 5211;
                         $transaksiPot->nominal_kredit = $request->potongan;
                         $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
                         $transaksiPot->type = $module;
                         $transaksiPot->save();
 
-                        $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                        $akunPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                        $akunKreditPot->nominal -= $request->potongan;
 
-                        $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                        $akunKasPot->nominal += $request->potongan;
+                        $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                        $akunDebitPot->nominal += $request->potongan;
                     }
                 } else {
-                    $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                     if ($potongan) {
-                        $akunPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal += $potongan->nominal_kredit;
 
-                        $akunKasPot->nominal -= $potongan->nominal_debit;
+                        $akunDebitPot->nominal -= $potongan->nominal_debit;
 
                         $potongan->delete();
                     }
                 }
-                $akunPot->save();
-                $akunKasPot->save();
+                $akunKreditPot->save();
+                $akunDebitPot->save();
 
                 $transaksi->user_id = Auth::user()->id;
                 $transaksi->tgl = $request->tgl;
@@ -393,6 +471,153 @@ class ModuleService
                 ], 500);
             }
         }
+        else if ($module == 'utang') {
+            DB::beginTransaction();
+            try {
+                $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'utang')->firstOrFail();
+                $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: " . $transaksi->keterangan)->where('type', 'utang')->first();
+
+                if ($request->jenis_transaksi === 511 || $request->jenis_transaksi === 512) {
+                    $nomor_akun_kredit = 211;
+                } else if ($request->jenis_transaksi === 211) {
+                    $nomor_akun_kredit = 521;
+                } else {
+                    $nomor_akun_kredit = 212;
+                }
+
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_kredit)->firstOrFail();
+                if ($nomor_akun_kredit == $transaksi->nomor_akun_kredit) {
+                    if ($akunKredit->saldo_normal == 'kredit') {
+                        $akunKredit->nominal -= $transaksi->nominal_kredit;
+                        $akunKredit->nominal += $request->nominal;
+                    } else {
+                        $akunKredit->nominal += $transaksi->nominal_kredit;
+                        $akunKredit->nominal -= $request->nominal;
+                    }
+                    $akunKredit->save();
+                } else {
+                    if ($akunKredit->saldo_normal == 'kredit') {
+                        $akunKredit->nominal -= $transaksi->nominal_kredit;
+                    } else {
+                        $akunKredit->nominal += $transaksi->nominal_kredit;
+                    }
+                    $akunKredit->save();
+
+                    $akunKreditBaru = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $nomor_akun_kredit)->firstOrFail();
+                    if ($akunKreditBaru->saldo_normal == 'kredit') {
+                        $akunKreditBaru->nominal += $request->nominal;
+                    } else {
+                        $akunKreditBaru->nominal -= $request->nominal;
+                    }
+                    $akunKreditBaru->save();
+                }
+
+
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_debit)->firstOrFail();
+                if ($request->jenis_transaksi == $transaksi->nomor_akun_debit) {
+                    if ($akunDebit->saldo_normal == 'kredit') {
+                        $akunDebit->nominal += $transaksi->nominal_debit;
+                        $akunDebit->nominal -= $request->nominal;
+                    } else {
+                        $akunDebit->nominal -= $transaksi->nominal_debit;
+                        $akunDebit->nominal += $request->nominal;
+                    }
+                    $akunDebit->save();
+                } else {
+                    if ($akunDebit->saldo_normal == 'kredit') {
+                        $akunDebit->nominal += $transaksi->nominal_kredit;
+                    } else {
+                        $akunDebit->nominal -= $transaksi->nominal_kredit;
+                    }
+                    $akunDebit->save();
+
+                    $akunDebitBaru = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $request->jenis_transaksi)->firstOrFail();
+                    if ($akunDebitBaru->saldo_normal == 'kredit') {
+                        $akunDebitBaru->nominal -= $request->nominal;
+                    } else {
+                        $akunDebitBaru->nominal += $request->nominal;
+                    }
+                    $akunDebitBaru->save();
+                }
+
+                if ($request->has('potongan')) {
+                    if ($potongan) {
+                        $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
+                        $akunDebitPot->nominal += $potongan->nominal_debit;
+                        $akunDebitPot->nominal -= $request->potongan;
+
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                        $akunKreditPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal -= $request->potongan;
+
+                        $potongan->user_id = Auth::user()->id;
+                        $potongan->tgl = $request->tgl;
+                        $potongan->nominal_debit = $request->potongan;
+                        $potongan->nominal_kredit = $request->potongan;
+                        $potongan->keterangan = "Potongan: " . ucfirst($request->keterangan);
+                        $potongan->save();
+                    } else {
+                        $transaksiPot = new Transaksi();
+                        $transaksiPot->user_id = Auth::user()->id;
+                        $transaksiPot->tgl = $request->tgl;
+                        $transaksiPot->nomor_akun_debit = 211;
+                        $transaksiPot->nominal_debit = $request->potongan;
+                        $transaksiPot->nomor_akun_kredit = 5211;
+                        $transaksiPot->nominal_kredit = $request->potongan;
+                        $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
+                        $transaksiPot->type = $module;
+                        $transaksiPot->save();
+
+                        $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
+                        $akunDebitPot->nominal -= $request->potongan;
+
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                        $akunKreditPot->nominal -= $request->potongan;
+                    }
+                } else {
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    if ($potongan) {
+                        $akunDebitPot->nominal += $potongan->nominal_debit;
+
+                        $akunKreditPot->nominal += $potongan->nominal_kredit;
+
+                        $potongan->delete();
+                    }
+                }
+                $akunDebitPot->save();
+                $akunKreditPot->save();
+
+                $transaksi->user_id = Auth::user()->id;
+                $transaksi->tgl = $request->tgl;
+                $transaksi->nomor_akun_debit = $request->jenis_transaksi;
+                $transaksi->nominal_debit = $request->nominal;
+                $transaksi->nomor_akun_kredit = $nomor_akun_kredit;
+                $transaksi->nominal_kredit = $request->nominal;
+                $transaksi->keterangan = ucfirst($request->keterangan);
+                $transaksi->save();
+
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Berhasil mengupdate data utang!',
+                    'code' => 200,
+                ], 200);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                LogError::create([
+                    'user_id' => Auth::user()->id,
+                    'action' => 'Ubah Utang',
+                    'message' => $e,
+                ]);
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Gagal mengupdate data utang!',
+                    'code' => 500,
+                ], 500);
+            }
+        }
         else {
             return response()->json([
                 'status' => 'error',
@@ -410,27 +635,27 @@ class ModuleService
                 $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'pemasukan')->firstOrFail();
                 $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: ".$transaksi->keterangan)->where('type', 'pemasukan')->first();
 
-                $akunKas = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                $akunKas->nominal -= $transaksi->nominal_debit;
-                $akunKas->save();
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                $akunDebit->nominal -= $transaksi->nominal_debit;
+                $akunDebit->save();
 
-                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_kredit)->firstOrFail();
-                if ($akun->saldo_normal == 'kredit') {
-                    $akun->nominal -= $transaksi->nominal_kredit;
-                    $akun->save();
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_kredit)->firstOrFail();
+                if ($akunKredit->saldo_normal == 'kredit') {
+                    $akunKredit->nominal -= $transaksi->nominal_kredit;
+                    $akunKredit->save();
                 }
                 else {
-                    $akun->nominal += $transaksi->nominal_kredit;
-                    $akun->save();
+                    $akunKredit->nominal += $transaksi->nominal_kredit;
+                    $akunKredit->save();
                 }
 
                 if ($potongan) {
-                    $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
-                    $akunPot->nominal -= $potongan->nominal_debit;
-                    $akunPot->save();
-                    $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                    $akunKasPot->nominal += $potongan->nominal_kredit;
-                    $akunKasPot->save();
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 412)->firstOrFail();
+                    $akunDebitPot->nominal -= $potongan->nominal_debit;
+                    $akunDebitPot->save();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                    $akunKreditPot->nominal += $potongan->nominal_kredit;
+                    $akunKreditPot->save();
 
                     $potongan->delete();
                 }
@@ -463,26 +688,26 @@ class ModuleService
                 $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'pengeluaran')->firstOrFail();
                 $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: " . $transaksi->keterangan)->where('type', 'pengeluaran')->first();
 
-                $akunKas = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                $akunKas->nominal += $transaksi->nominal_kredit;
-                $akunKas->save();
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                $akunKredit->nominal += $transaksi->nominal_kredit;
+                $akunKredit->save();
 
-                $akun = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_debit)->firstOrFail();
-                if ($akun->saldo_normal == 'kredit') {
-                    $akun->nominal += $transaksi->nominal_debit;
-                    $akun->save();
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_debit)->firstOrFail();
+                if ($akunDebit->saldo_normal == 'kredit') {
+                    $akunDebit->nominal += $transaksi->nominal_debit;
+                    $akunDebit->save();
                 } else {
-                    $akun->nominal -= $transaksi->nominal_debit;
-                    $akun->save();
+                    $akunDebit->nominal -= $transaksi->nominal_debit;
+                    $akunDebit->save();
                 }
 
                 if ($potongan) {
-                    $akunPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunPot->nominal += $potongan->nominal_kredit;
-                    $akunPot->save();
-                    $akunKasPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
-                    $akunKasPot->nominal -= $potongan->nominal_debit;
-                    $akunKasPot->save();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunKreditPot->nominal += $potongan->nominal_kredit;
+                    $akunKreditPot->save();
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
+                    $akunDebitPot->nominal -= $potongan->nominal_debit;
+                    $akunDebitPot->save();
 
                     $potongan->delete();
                 }
@@ -505,6 +730,70 @@ class ModuleService
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Gagal mengahapus data pengeluaran!',
+                    'code' => 500,
+                ], 500);
+            }
+        }
+        else if ($module == 'utang') {
+            DB::beginTransaction();
+            try {
+                $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'utang')->firstOrFail();
+                $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: " . $transaksi->keterangan)->where('type', 'utang')->first();
+
+                if ($request->jenis_transaksi === 511 || $request->jenis_transaksi === 512) {
+                    $nomor_akun_kredit = 211;
+                } else if ($request->jenis_transaksi === 211) {
+                    $nomor_akun_kredit = 521;
+                } else {
+                    $nomor_akun_kredit = 212;
+                }
+
+                $akunKredit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $nomor_akun_kredit)->firstOrFail();
+                if ($akunKredit->saldo_normal == 'kredit') {
+                    $akunKredit->nominal -= $transaksi->nominal_kredit;
+                } else {
+                    $akunKredit->nominal += $transaksi->nominal_kredit;
+                }
+                $akunKredit->save();
+
+                $akunDebit = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', $transaksi->nomor_akun_debit)->firstOrFail();
+                if ($akunDebit->saldo_normal == 'kredit') {
+                    $akunDebit->nominal += $transaksi->nominal_debit;
+                    $akunDebit->save();
+                } else {
+                    $akunDebit->nominal -= $transaksi->nominal_debit;
+                    $akunDebit->save();
+                }
+
+                if ($potongan) {
+                    $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
+                    $akunDebitPot->nominal += $potongan->nominal_debit;
+                    $akunDebitPot->save();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunKreditPot->nominal += $potongan->nominal_kredit;
+                    $akunKreditPot->save();
+
+                    $potongan->delete();
+                }
+                $transaksi->delete();
+
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Berhasil menghapus data utang!',
+                    'code' => 200,
+                ], 200);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                LogError::create([
+                    'user_id' => Auth::user()->id,
+                    'action' => 'Hapus Utang',
+                    'message' => $e,
+                ]);
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Gagal mengahapus data Utang!',
                     'code' => 500,
                 ], 500);
             }

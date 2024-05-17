@@ -81,25 +81,22 @@ Utang
                     <div class="form-group">
                         <label for="jenis_transaksi">Jenis Transaksi</label>
                         <i class="fas fa-question-circle information-icon"
-                            info="Jenis transaksi pengeluaran kas secara tunai, yang paling mendekati berdasarkan dengan keterangan yang telah disediakan."></i>
+                            info="Kondisi utang pada usaha, yang paling mendekati berdasarkan dengan keterangan yang telah disediakan."></i>
                         <input type="hidden" name="id" id="id">
                         <select name="jenis_transaksi" id="jenis_transaksi" class="form-control" required>
                             <option value="">-- Pilih Jenis Transaksi --</option>
-                            <option value="511">Pembelian Barang Dagang</option>
-                            <option value="211">Pelunasan Pembelian Barang Dagang Kredit</option>
-                            <option value="512">Pembayaran Beban Angkut Pembelian</option>
-                            <option value="413">Retur Penjualan (Penjualan Tunai)</option>
-                            <option value="522">Pembayaran Telepon atau Listrik</option>
-                            <option value="523">Pembayaran Air</option>
-                            <option value="113">Pembelian Perlengkapan Toko</option>
-                            <option value="124">Pembelian Peralatan Toko</option>
-                            <option value="528">Pembayaran Gaji Karyawan</option>
-                            <option value="529">Pembayaran Iklan</option>
-                            <option value="530">Pembayaran Administrasi Bank</option>
-                            <option value="531">Pembayaran Operasi Kantor Lainnya</option>
-                            <option value="533">Pembayaran Beban Lain-lain</option>
-                            <option value="212">Pembayaran Utang Beban</option>
-                            <option value="312">Pengambilan Prive</option>
+                            <option value="511">Pembelian Kredit</option>
+                            <option value="512">Utang Beban Angkut Pembelian</option>
+                            <option value="211">Retur Pembelian (Pembelian Kredit)</option>
+                            <option value="522">Utang Telepon atau Listrik</option>
+                            <option value="523">Utang Air</option>
+                            <option value="524">Utang Perlengkapan Toko</option>
+                            <option value="525">Utang Peralatan Toko</option>
+                            <option value="528">Utang Gaji Karyawan</option>
+                            <option value="529">Utang Iklan</option>
+                            <option value="530">Utang Administrasi Bank</option>
+                            <option value="531">Utang Operasional Kantor Lainnya</option>
+                            <option value="533">Utang Beban Lain-lain</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -127,7 +124,7 @@ Utang
                         <input type="checkbox" class="form-check-input" id="checkPotongan">
                         <label class="form-check-label" for="checkPotongan">Potongan</label>
                         <i class="fas fa-question-circle information-icon"
-                            info="Diisi ketika memperoleh potongan atas pembelian. Potongan ini akan mempengaruhi pendapatan usaha anda."></i>
+                            info="Diisi ketika memperoleh potongan atas utang."></i>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -178,6 +175,7 @@ Utang
             $('#formUtang')[0].reset();
             $('#modalUtangTitle').text('Form Utang');
             $('#jenis_transaksi').val('').trigger('change');
+            $('#keterangan').text('');
             // init currency format
             let inpNominal = document.getElementById('nominalTransaksi');
             formatCurrency(inpNominal);
@@ -191,7 +189,7 @@ Utang
                 responsive: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('pengeluaran.table') }}",
+                    url: "{{ route('utang.table') }}",
                     method: 'GET',
                     data: {
                         query: query,
@@ -264,7 +262,7 @@ Utang
                 $('.sl-potongan').append(`
                     <div class="form-group">
                         <label for="potonganTransaksi">Nominal Potongan</label>
-                        <i class="fas fa-question-circle information-icon" info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara tunai dan diperoleh potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
+                        <i class="fas fa-question-circle information-icon" info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara kredit dan diperoleh potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
                         <input type="hidden" id="potongan" name="potongan">
                         <input type="text" class="form-control" id="potonganTransaksi" oninput="formatCurrency(this)" required>
                     </div>
@@ -280,7 +278,7 @@ Utang
         $("#formUtang").submit(function(event) {
             event.preventDefault();
             $.ajax({
-                url: "{{ route('pengeluaran.createUpdate') }}",
+                url: "{{ route('utang.createUpdate') }}",
                 method: 'POST',
                 data: new FormData(this),
                 contentType: false,
@@ -336,7 +334,7 @@ Utang
         $(document).on('click', '.btnEdit', function() {
             const id = $(this).attr('id');
             $.ajax({
-                url: `/pengeluaran/edit/${id}`,
+                url: `/utang/edit/${id}`,
                 method: 'GET',
                 beforeSend: function() {
                     Swal.fire({
@@ -398,7 +396,7 @@ Utang
             const id = $(this).attr('id');
             Swal.fire({
                 title: 'Konfirmasi!',
-                text: 'Yakin ingin menghapus data pengeluaran?',
+                text: 'Yakin ingin menghapus data utang?',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Batal',
@@ -407,7 +405,7 @@ Utang
             }).then((result) => {
                 if(result.value) {
                     $.ajax({
-                        url: "{{ route('pengeluaran.destroy') }}",
+                        url: "{{ route('utang.destroy') }}",
                         method: "POST",
                         data: {
                             id: id,

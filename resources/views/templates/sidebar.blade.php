@@ -66,9 +66,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('utang.view') }}">
                         <i class="fas fa-balance-scale"></i>
-                        <span> Utang (Coming Soon) </span>
+                        <span> Utang </span>
                     </a>
                 </li>
                 <li>

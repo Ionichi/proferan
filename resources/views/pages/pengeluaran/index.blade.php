@@ -95,7 +95,7 @@ Pengeluaran
                             <option value="528">Pembayaran Gaji Karyawan</option>
                             <option value="529">Pembayaran Iklan</option>
                             <option value="530">Pembayaran Administrasi Bank</option>
-                            <option value="531">Pembayaran Operasi Kantor Lainnya</option>
+                            <option value="531">Pembayaran Operasional Kantor Lainnya</option>
                             <option value="533">Pembayaran Beban Lain-lain</option>
                             <option value="212">Pembayaran Utang Beban</option>
                             <option value="312">Pengambilan Prive</option>
@@ -126,7 +126,7 @@ Pengeluaran
                         <input type="checkbox" class="form-check-input" id="checkPotongan">
                         <label class="form-check-label" for="checkPotongan">Potongan</label>
                         <i class="fas fa-question-circle information-icon"
-                            info="Diisi ketika memperoleh potongan atas pembelian. Potongan ini akan mempengaruhi pendapatan usaha anda."></i>
+                            info="Diisi ketika memperoleh potongan atas pembelian."></i>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -177,6 +177,7 @@ Pengeluaran
             $('#formPengeluaran')[0].reset();
             $('#modalPengeluaranTitle').text('Form Pengeluaran');
             $('#jenis_transaksi').val('').trigger('change');
+            $('#keterangan').text('');
             // init currency format
             let inpNominal = document.getElementById('nominalTransaksi');
             formatCurrency(inpNominal);

@@ -107,7 +107,7 @@
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="checkPotongan">
                             <label class="form-check-label" for="checkPotongan">Potongan</label>
-                            <i class="fas fa-question-circle information-icon" info="Diisi ketika memperoleh potongan atas penjualan. Potongan ini akan mempengaruhi pendapatan usaha anda."></i>
+                            <i class="fas fa-question-circle information-icon" info="Diisi ketika memperoleh potongan atas penjualan."></i>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -158,6 +158,7 @@
             $('#formPemasukan')[0].reset();
             $('#modalPemasukanTitle').text('Form Pemasukan');
             $('#jenis_transaksi').val('').trigger('change');
+            $('#keterangan').text('');
             // init currency format
             let inpNominal = document.getElementById('nominalTransaksi');
             formatCurrency(inpNominal);
