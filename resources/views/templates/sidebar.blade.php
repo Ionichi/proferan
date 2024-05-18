@@ -78,9 +78,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('penyesuaian.view') }}">
                         <i class="fas fa-edit"></i>
-                        <span> Penyesuaian (Coming Soon) </span>
+                        <span> Penyesuaian </span>
                     </a>
                 </li>
             </ul>

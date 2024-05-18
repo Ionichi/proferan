@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\PenyesuaianController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UtangController;
@@ -67,6 +68,12 @@ Route::middleware('auth')->group(function() {
     Route::post('/piutang', [PiutangController::class, 'createUpdate'])->name('piutang.createUpdate');
     Route::get('/piutang/edit/{id}', [PiutangController::class, 'edit'])->name('piutang.edit');
     Route::post('/piutang/destroy', [PiutangController::class, 'destroy'])->name('piutang.destroy');
+
+    Route::get('/penyesuaian', [PenyesuaianController::class, 'index'])->name('penyesuaian.view');
+    Route::get('/penyesuaian/table', [PenyesuaianController::class, 'table'])->name('penyesuaian.table');
+    Route::post('/penyesuaian', [PenyesuaianController::class, 'createUpdate'])->name('penyesuaian.createUpdate');
+    Route::get('/penyesuaian/edit/{id}', [PenyesuaianController::class, 'edit'])->name('penyesuaian.edit');
+    Route::post('/penyesuaian/destroy', [PenyesuaianController::class, 'destroy'])->name('penyesuaian.destroy');
 });
 
 
