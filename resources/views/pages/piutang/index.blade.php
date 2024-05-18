@@ -1,6 +1,6 @@
 @extends('templates.main')
 @section('title')
-Utang
+Piutang
 @endsection
 @section('styles')
 {{-- Datatable --}}
@@ -38,12 +38,12 @@ Utang
         <div class="col-12">
             <div class="card-box">
                 <div class="card-header mb-3 bg-dark">
-                    <h2 class="text-white">Tabel Utang</h2>
+                    <h2 class="text-white">Tabel Piutang</h2>
                 </div>
                 <button type="button" class="btn btn-success waves-effect width-md waves-light rounded float-right"
-                    data-toggle="modal" data-target="#modalUtang">Tambah Utang</button>
+                    data-toggle="modal" data-target="#modalPiutang">Tambah Piutang</button>
                 <br><br><br>
-                <table id="tableUtang" class="table table-bordered dt-responsive nowrap table-striped"
+                <table id="tablePiutang" class="table table-bordered dt-responsive nowrap table-striped"
                     width="100%">
                     <thead class="thead-dark">
                         <tr class="text-center">
@@ -65,38 +65,29 @@ Utang
 </div>
 
 {{-- modals --}}
-<div class="modal fade" id="modalUtang" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="modalUtangTitle" aria-hidden="true">
+<div class="modal fade" id="modalPiutang" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="modalPiutangTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalUtangTitle">Form Utang</h4>
+                <h4 class="modal-title" id="modalPiutangTitle">Form Piutang</h4>
                 <button type="button" id="cancel" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formUtang" method="POST">
+                <form id="formPiutang" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="jenis_transaksi">Jenis Transaksi</label>
                         <i class="fas fa-question-circle information-icon"
-                            info="Kondisi utang pada usaha, yang paling mendekati berdasarkan dengan keterangan yang telah disediakan."></i>
+                            info="Kondisi piutang pada usaha, yang paling mendekati berdasarkan dengan keterangan yang telah disediakan."></i>
                         <input type="hidden" name="id" id="id">
                         <select name="jenis_transaksi" id="jenis_transaksi" class="form-control" required>
                             <option value="">-- Pilih Jenis Transaksi --</option>
-                            <option value="511">Pembelian Kredit</option>
-                            <option value="512">Utang Beban Angkut Pembelian</option>
-                            <option value="211">Retur Pembelian (Pembelian Kredit)</option>
-                            <option value="522">Utang Telepon atau Listrik</option>
-                            <option value="523">Utang Air</option>
-                            <option value="524">Utang Perlengkapan Toko</option>
-                            <option value="525">Utang Peralatan Toko</option>
-                            <option value="528">Utang Gaji Karyawan</option>
-                            <option value="529">Utang Iklan</option>
-                            <option value="530">Utang Administrasi Bank</option>
-                            <option value="531">Utang Operasional Kantor Lainnya</option>
-                            <option value="533">Utang Beban Lain-lain</option>
+                            <option value="411">Piutang Usaha</option>
+                            <option value="422">Pendapatan Beban Angkut Penjualan Kredit</option>
+                            <option value="112">Retur Penjualan Kredit</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -124,11 +115,11 @@ Utang
                         <input type="checkbox" class="form-check-input" id="checkPotongan">
                         <label class="form-check-label" for="checkPotongan">Potongan</label>
                         <i class="fas fa-question-circle information-icon"
-                            info="Diisi ketika memperoleh potongan atas utang."></i>
+                            info="Diisi ketika memperoleh potongan atas piutang."></i>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" id="saveUtang" class="btn btn-success">Simpan</button>
+                        <button type="submit" id="savePiutang" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -172,8 +163,8 @@ Utang
             input.value = formattedValue;
         }
         const resetForm = () => {
-            $('#formUtang')[0].reset();
-            $('#modalUtangTitle').text('Form Utang');
+            $('#formPiutang')[0].reset();
+            $('#modalPiutangTitle').text('Form Piutang');
             $('#jenis_transaksi').val('').trigger('change');
             $('#keterangan').text('');
             // init currency format
@@ -182,14 +173,14 @@ Utang
             $('.sl-potongan').empty();
         }
 
-        const tableUtang = (query = '') => {
-            $('#tableUtang').DataTable({
+        const tablePiutang = (query = '') => {
+            $('#tablePiutang').DataTable({
                 processing: true,
                 info: true,
                 responsive: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('utang.table') }}",
+                    url: "{{ route('piutang.table') }}",
                     method: 'GET',
                     data: {
                         query: query,
@@ -234,7 +225,7 @@ Utang
             formatCurrency(inpNominal);
 
             // init table
-            tableUtang();
+            tablePiutang();
 
             // init select2
             $('#jenis_transaksi').select2();
@@ -262,7 +253,7 @@ Utang
                 $('.sl-potongan').append(`
                     <div class="form-group">
                         <label for="potonganTransaksi">Nominal Potongan</label>
-                        <i class="fas fa-question-circle information-icon" info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara kredit dan diperoleh potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
+                        <i class="fas fa-question-circle information-icon" info="Contoh:<br>Menjual barang dagang sejumlah Rp 100.000 secara kredit dan diberikan potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
                         <input type="hidden" id="potongan" name="potongan">
                         <input type="text" class="form-control" id="potonganTransaksi" oninput="formatCurrency(this)" required>
                     </div>
@@ -275,10 +266,10 @@ Utang
             }
         });
 
-        $("#formUtang").submit(function(event) {
+        $("#formPiutang").submit(function(event) {
             event.preventDefault();
             $.ajax({
-                url: "{{ route('utang.createUpdate') }}",
+                url: "{{ route('piutang.createUpdate') }}",
                 method: 'POST',
                 data: new FormData(this),
                 contentType: false,
@@ -322,8 +313,8 @@ Utang
                             confirmButtonText: 'Oke',
                         });
                         if(response.code == 200) {
-                            $('#tableUtang').DataTable().ajax.reload(null, false);
-                            $('#modalUtang').modal('hide');
+                            $('#tablePiutang').DataTable().ajax.reload(null, false);
+                            $('#modalPiutang').modal('hide');
                             resetForm();
                         }
                     }
@@ -334,7 +325,7 @@ Utang
         $(document).on('click', '.btnEdit', function() {
             const id = $(this).attr('id');
             $.ajax({
-                url: `/utang/edit/${id}`,
+                url: `/piutang/edit/${id}`,
                 method: 'GET',
                 beforeSend: function() {
                     Swal.fire({
@@ -365,7 +356,7 @@ Utang
                             <div class="form-group">
                                 <label for="potonganTransaksi">Nominal Potongan</label>
                                 <i class="fas fa-question-circle information-icon"
-                                    info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara kredit dan diperoleh potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
+                                    info="Contoh:<br>Menjual barang dagang sejumlah Rp 100.000 secara kredit dan diberikan potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
                                 <input type="hidden" id="potongan" name="potongan">
                                 <input type="text" class="form-control" id="potonganTransaksi" oninput="formatCurrency(this)" required>
                             </div>
@@ -378,8 +369,8 @@ Utang
                             $('.sl-potongan').empty();
                         }
 
-                        $('#modalUtangTitle').text('Form Edit Utang');
-                        $('#modalUtang').modal('show');
+                        $('#modalPiutangTitle').text('Form Edit Piutang');
+                        $('#modalPiutang').modal('show');
                     } else {
                         Swal.fire({
                             title: 'Gagal!',
@@ -396,7 +387,7 @@ Utang
             const id = $(this).attr('id');
             Swal.fire({
                 title: 'Konfirmasi!',
-                text: 'Yakin ingin menghapus data utang?',
+                text: 'Yakin ingin menghapus data piutang?',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Batal',
@@ -405,7 +396,7 @@ Utang
             }).then((result) => {
                 if(result.value) {
                     $.ajax({
-                        url: "{{ route('utang.destroy') }}",
+                        url: "{{ route('piutang.destroy') }}",
                         method: "POST",
                         data: {
                             id: id,
@@ -428,7 +419,7 @@ Utang
                                 type: response.status,
                                 confirmButtonText: 'Oke',
                             });
-                            $('#tableUtang').DataTable().ajax.reload(null, false);
+                            $('#tablePiutang').DataTable().ajax.reload(null, false);
                         }
                     });
                 }

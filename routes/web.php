@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UtangController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,12 @@ Route::middleware('auth')->group(function() {
     Route::post('/utang', [UtangController::class, 'createUpdate'])->name('utang.createUpdate');
     Route::get('/utang/edit/{id}', [UtangController::class, 'edit'])->name('utang.edit');
     Route::post('/utang/destroy', [UtangController::class, 'destroy'])->name('utang.destroy');
+
+    Route::get('/piutang', [PiutangController::class, 'index'])->name('piutang.view');
+    Route::get('/piutang/table', [PiutangController::class, 'table'])->name('piutang.table');
+    Route::post('/piutang', [PiutangController::class, 'createUpdate'])->name('piutang.createUpdate');
+    Route::get('/piutang/edit/{id}', [PiutangController::class, 'edit'])->name('piutang.edit');
+    Route::post('/piutang/destroy', [PiutangController::class, 'destroy'])->name('piutang.destroy');
 });
 
 

@@ -72,9 +72,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('piutang.view') }}">
                         <i class="fas fa-hand-holding-usd"></i>
-                        <span> Piutang (Coming Soon) </span>
+                        <span> Piutang </span>
                     </a>
                 </li>
                 <li>

@@ -264,7 +264,7 @@ Pengeluaran
                 $('.sl-potongan').append(`
                     <div class="form-group">
                         <label for="potonganTransaksi">Nominal Potongan</label>
-                        <i class="fas fa-question-circle information-icon" info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara tunai dan diperoleh potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
+                        <i class="fas fa-question-circle information-icon" info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara tunai dan diberikan potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
                         <input type="hidden" id="potongan" name="potongan">
                         <input type="text" class="form-control" id="potonganTransaksi" oninput="formatCurrency(this)" required>
                     </div>
@@ -367,7 +367,7 @@ Pengeluaran
                             <div class="form-group">
                                 <label for="potonganTransaksi">Nominal Potongan</label>
                                 <i class="fas fa-question-circle information-icon"
-                                    info="Contoh:<br>Terjual sejumlah Rp 100.000 secara tunai dan diperoleh potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
+                                    info="Contoh:<br>Membeli barang dagang sejumlah Rp 100.000 secara tunai dan diberikan potongan Rp 20.000. Maka input di nominal adalah Rp 100.000 dan input di nominal potongan adalah Rp 20.000."></i>
                                 <input type="hidden" id="potongan" name="potongan">
                                 <input type="text" class="form-control" id="potonganTransaksi" oninput="formatCurrency(this)" required>
                             </div>
