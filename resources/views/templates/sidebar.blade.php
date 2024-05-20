@@ -54,31 +54,31 @@
                 <li class="menu-title">Features</li>
 
                 <li>
-                    <a href="{{ route('pemasukan.view') }}">
+                    <a href="/pemasukan">
                         <i class="fas fa-wallet"></i>
                         <span> Pemasukan </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('pengeluaran.view') }}">
+                    <a href="/pengeluaran">
                         <i class="fas fa-cash-register"></i>
                         <span> Pengeluaran </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('utang.view') }}">
+                    <a href="/utang">
                         <i class="fas fa-balance-scale"></i>
                         <span> Utang </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('piutang.view') }}">
+                    <a href="/piutang">
                         <i class="fas fa-hand-holding-usd"></i>
                         <span> Piutang </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('penyesuaian.view') }}">
+                    <a href="/penyesuaian">
                         <i class="fas fa-edit"></i>
                         <span> Penyesuaian </span>
                     </a>

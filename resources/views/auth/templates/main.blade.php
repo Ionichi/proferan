@@ -9,6 +9,7 @@
         <meta content="WebApp for help UMKM to create simple financial statements" name="description" />
         <meta content="Proferam Team" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
