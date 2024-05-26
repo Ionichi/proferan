@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\JurnalUmumController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PenyesuaianController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UtangController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,8 +76,13 @@ Route::middleware('auth')->group(function() {
     Route::post('/penyesuaian', [PenyesuaianController::class, 'createUpdate'])->name('penyesuaian.createUpdate');
     Route::get('/penyesuaian/edit/{id}', [PenyesuaianController::class, 'edit'])->name('penyesuaian.edit');
     Route::post('/penyesuaian/destroy', [PenyesuaianController::class, 'destroy'])->name('penyesuaian.destroy');
-});
 
+
+    Route::prefix('laporan')->group(function() {
+        Route::get('/jurnal-umum', [JurnalUmumController::class, 'index'])->name('laporan.jurnal.umum.view');
+        Route::get('/jurnal-umum/cetak', [JurnalUmumController::class, 'print'])->name('laporan.jurnal.umum.print');
+    });
+});
 
 // Admin Panel
 Route::prefix('admin')->middleware(['auth:admin'])->group(function() {

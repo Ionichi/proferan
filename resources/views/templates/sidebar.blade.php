@@ -44,7 +44,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="/laporan/jurnal-umum">Jurnal Umum</a></li>
                         <li><a href="#">Coming Soon</a></li>
                         <li><a href="#">Coming Soon</a></li>
                         <li><a href="#">Coming Soon</a></li>
