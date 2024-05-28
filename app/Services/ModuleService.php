@@ -114,14 +114,14 @@ class ModuleService
                     $transaksiPot->tgl = $request->tgl;
                     $transaksiPot->nomor_akun_debit = 111;
                     $transaksiPot->nominal_debit = $request->potongan;
-                    $transaksiPot->nomor_akun_kredit = 5211;
+                    $transaksiPot->nomor_akun_kredit = 514;
                     $transaksiPot->nominal_kredit = $request->potongan;
                     $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
                     $transaksiPot->type = $module;
                     $transaksiPot->save();
 
-                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunKreditPot->nominal -= $request->potongan;
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                    $akunKreditPot->nominal += $request->potongan;
                     $akunKreditPot->save();
                     $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                     $akunDebitPot->nominal += $request->potongan;
@@ -155,7 +155,7 @@ class ModuleService
                 if ($request->jenis_transaksi == 511 || $request->jenis_transaksi == 512) {
                     $nomor_akun_kredit = 211;
                 } else if ($request->jenis_transaksi == 211) {
-                    $nomor_akun_kredit = 521;
+                    $nomor_akun_kredit = 513;
                 } else {
                     $nomor_akun_kredit = 212;
                 }
@@ -192,7 +192,7 @@ class ModuleService
                     $transaksiPot->tgl = $request->tgl;
                     $transaksiPot->nomor_akun_debit = 211;
                     $transaksiPot->nominal_debit = $request->potongan;
-                    $transaksiPot->nomor_akun_kredit = 5211;
+                    $transaksiPot->nomor_akun_kredit = 514;
                     $transaksiPot->nominal_kredit = $request->potongan;
                     $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
                     $transaksiPot->type = $module;
@@ -201,8 +201,8 @@ class ModuleService
                     $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
                     $akunDebitPot->nominal -= $request->potongan;
                     $akunDebitPot->save();
-                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunKreditPot->nominal -= $request->potongan;
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                    $akunKreditPot->nominal += $request->potongan;
                     $akunKreditPot->save();
                 }
 
@@ -539,9 +539,9 @@ class ModuleService
 
                 if ($request->has('potongan')) {
                     if ($potongan) {
-                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                        $akunKreditPot->nominal += $potongan->nominal_kredit;
-                        $akunKreditPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                        $akunKreditPot->nominal -= $potongan->nominal_kredit;
+                        $akunKreditPot->nominal += $request->potongan;
 
                         $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                         $akunDebitPot->nominal -= $potongan->nominal_debit;
@@ -559,23 +559,23 @@ class ModuleService
                         $transaksiPot->tgl = $request->tgl;
                         $transaksiPot->nomor_akun_debit = 111;
                         $transaksiPot->nominal_debit = $request->potongan;
-                        $transaksiPot->nomor_akun_kredit = 5211;
+                        $transaksiPot->nomor_akun_kredit = 514;
                         $transaksiPot->nominal_kredit = $request->potongan;
                         $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
                         $transaksiPot->type = $module;
                         $transaksiPot->save();
 
-                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                        $akunKreditPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                        $akunKreditPot->nominal += $request->potongan;
 
                         $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                         $akunDebitPot->nominal += $request->potongan;
                     }
                 } else {
-                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
                     $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                     if ($potongan) {
-                        $akunKreditPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal -= $potongan->nominal_kredit;
 
                         $akunDebitPot->nominal -= $potongan->nominal_debit;
 
@@ -623,7 +623,7 @@ class ModuleService
                 if ($request->jenis_transaksi == 511 || $request->jenis_transaksi == 512) {
                     $nomor_akun_kredit = 211;
                 } else if ($request->jenis_transaksi == 211) {
-                    $nomor_akun_kredit = 521;
+                    $nomor_akun_kredit = 513;
                 } else {
                     $nomor_akun_kredit = 212;
                 }
@@ -689,9 +689,9 @@ class ModuleService
                         $akunDebitPot->nominal += $potongan->nominal_debit;
                         $akunDebitPot->nominal -= $request->potongan;
 
-                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                        $akunKreditPot->nominal += $potongan->nominal_kredit;
-                        $akunKreditPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                        $akunKreditPot->nominal -= $potongan->nominal_kredit;
+                        $akunKreditPot->nominal += $request->potongan;
 
                         $potongan->user_id = Auth::user()->id;
                         $potongan->tgl = $request->tgl;
@@ -705,7 +705,7 @@ class ModuleService
                         $transaksiPot->tgl = $request->tgl;
                         $transaksiPot->nomor_akun_debit = 211;
                         $transaksiPot->nominal_debit = $request->potongan;
-                        $transaksiPot->nomor_akun_kredit = 5211;
+                        $transaksiPot->nomor_akun_kredit = 514;
                         $transaksiPot->nominal_kredit = $request->potongan;
                         $transaksiPot->keterangan = "Potongan: " . ucfirst($request->keterangan);
                         $transaksiPot->type = $module;
@@ -714,16 +714,16 @@ class ModuleService
                         $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
                         $akunDebitPot->nominal -= $request->potongan;
 
-                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                        $akunKreditPot->nominal -= $request->potongan;
+                        $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                        $akunKreditPot->nominal += $request->potongan;
                     }
                 } else {
                     $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
-                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
                     if ($potongan) {
                         $akunDebitPot->nominal += $potongan->nominal_debit;
 
-                        $akunKreditPot->nominal += $potongan->nominal_kredit;
+                        $akunKreditPot->nominal -= $potongan->nominal_kredit;
 
                         $potongan->delete();
                     }
@@ -1096,8 +1096,8 @@ class ModuleService
                 }
 
                 if ($potongan) {
-                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunKreditPot->nominal += $potongan->nominal_kredit;
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                    $akunKreditPot->nominal -= $potongan->nominal_kredit;
                     $akunKreditPot->save();
                     $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 111)->firstOrFail();
                     $akunDebitPot->nominal -= $potongan->nominal_debit;
@@ -1155,8 +1155,8 @@ class ModuleService
                     $akunDebitPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 211)->firstOrFail();
                     $akunDebitPot->nominal += $potongan->nominal_debit;
                     $akunDebitPot->save();
-                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 5211)->firstOrFail();
-                    $akunKreditPot->nominal += $potongan->nominal_kredit;
+                    $akunKreditPot = MasterAkun::where('user_id', Auth::user()->id)->where('nomor_akun', 514)->firstOrFail();
+                    $akunKreditPot->nominal -= $potongan->nominal_kredit;
                     $akunKreditPot->save();
 
                     $potongan->delete();

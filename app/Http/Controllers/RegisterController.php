@@ -250,7 +250,7 @@ class RegisterController extends Controller
                 [
                     'user_id' => $user->id,
                     'nama' => 'Retur Pembelian',
-                    'nomor_akun' => 521,
+                    'nomor_akun' => 513,
                     'saldo_normal' => 'kredit',
                     'jenis_akun_id' => 'JK-PFA-2024-013',
                     'nominal' => 0,
@@ -260,8 +260,8 @@ class RegisterController extends Controller
                 [
                     'user_id' => $user->id,
                     'nama' => 'Potongan Pembelian',
-                    'nomor_akun' => 5211,
-                    'saldo_normal' => 'debit',
+                    'nomor_akun' => 514,
+                    'saldo_normal' => 'kredit',
                     'jenis_akun_id' => 'JK-PFA-2024-013',
                     'nominal' => 0,
                     'periode_bulan' => Carbon::parse(date('F'))->locale('id')->settings(['formatFunction' => 'translatedFormat'])->format('F'),

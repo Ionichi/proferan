@@ -81,7 +81,7 @@
                                 <option value="411">Pendapatan Penjualan</option>
                                 <option value="112">Penerimaan Piutang</option>
                                 <option value="421">Pendapatan Bunga</option>
-                                <option value="521">Retur Pembelian (Pembelian Tunai)</option>
+                                <option value="513">Retur Pembelian (Pembelian Tunai)</option>
                                 <option value="422">Pendapatan Usaha Lain</option>
                                 <option value="423">Pendapatan Lain-lain</option>
                                 <option value="311">Penambahan Modal</option>
