@@ -88,6 +88,7 @@ Penyesuaian
                             <option value="527">Penyesuaian Peralatan</option>
                             <option value="526">Penyesuaian Bangunan</option>
                             <option value="524">Penyesuaian Perlengkapan</option>
+                            <option value="114">Penyesuaian Barang Dagang</option>
                         </select>
                     </div>
                     <div class="form-group">

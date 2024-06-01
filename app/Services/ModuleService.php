@@ -329,7 +329,11 @@ class ModuleService
                 }
                 else if ($request->jenis_transaksi == 524) {
                     $nomor_akun_kredit = 113;
-                    $keterangan = "Penyusutan Perlengkapan";
+                    $keterangan = "Penyesuaian Perlengkapan";
+                }
+                else if ($request->jenis_transaksi == 114) {
+                    $nomor_akun_kredit = 500;
+                    $keterangan = "Persediaan Barang Dagang";
                 }
                 else {
                     throw new \Exception('Jenis transaksi tidak valid');
@@ -965,7 +969,11 @@ class ModuleService
                 }
                 else if ($request->jenis_transaksi == 524) {
                     $nomor_akun_kredit = 113;
-                    $keterangan = "Penyusutan Perlengkapan";
+                    $keterangan = "Penyesuaian Perlengkapan";
+                }
+                else if ($request->jenis_transaksi == 114) {
+                    $nomor_akun_kredit = 500;
+                    $keterangan = "Persediaan Barang Dagang";
                 }
                 else {
                     throw new \Exception('Jenis transaksi tidak valid');
