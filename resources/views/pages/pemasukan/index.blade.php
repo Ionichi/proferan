@@ -84,7 +84,10 @@
                                 <option value="513">Retur Pembelian (Pembelian Tunai)</option>
                                 <option value="422">Pendapatan Usaha Lain</option>
                                 <option value="423">Pendapatan Lain-lain</option>
-                                <option value="311">Penambahan Modal</option>
+                                <option value="111">Pertambahan Modal Uang</option>
+                                <option value="121">Pertambahan Modal Tanah</option>
+                                <option value="122">Pertambahan Modal Bangunan</option>
+                                <option value="124">Pertambahan Modal Peralatan</option>
                             </select>
                         </div>
                         <div class="form-group">
