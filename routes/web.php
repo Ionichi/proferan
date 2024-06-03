@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\JurnalUmumController;
+use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PenyesuaianController;
@@ -81,6 +82,9 @@ Route::middleware('auth')->group(function() {
     Route::prefix('laporan')->group(function() {
         Route::get('/jurnal-umum', [JurnalUmumController::class, 'index'])->name('laporan.jurnal.umum.view');
         Route::get('/jurnal-umum/cetak', [JurnalUmumController::class, 'print'])->name('laporan.jurnal.umum.print');
+
+        Route::get('/laba-rugi', [LabaRugiController::class, 'index'])->name('laporan.laba.rugi.view');
+        Route::get('/laba-rugi/cetak', [LabaRugiController::class, 'print'])->name('laporan.laba.rugi.print');
     });
 });
 

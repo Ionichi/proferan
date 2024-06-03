@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
-    <title>Jurnal Umum - {{ $dataUsaha['nama'] }}</title>
+    <title>Laporan Jurnal Umum - {{ $dataUsaha['nama'] }}</title>
 </head>
 <style>
 @font-face {

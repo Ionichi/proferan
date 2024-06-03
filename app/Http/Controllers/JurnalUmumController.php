@@ -72,6 +72,6 @@ class JurnalUmumController extends Controller
         });
 
         $pdf = Pdf::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->setPaper('A4')->loadView('pdf.pdf-jurnal-umum', compact('dataUsaha', 'data'));
-    	return $pdf->stream('Jurnal Umum.pdf');
+    	return $pdf->stream('Laporan Jurnal Umum.pdf');
     }
 }
