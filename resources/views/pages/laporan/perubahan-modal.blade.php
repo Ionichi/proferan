@@ -1,6 +1,6 @@
 @extends('templates.main')
 @section('title')
-    Laporan - Laba Rugi
+    Laporan - Perubahan Modal
 @endsection
 @section('styles')
     {{-- select2 --}}
@@ -29,7 +29,7 @@
             <div class="col-12">
                 <div class="card-box">
                     <div class="card-header mb-3 bg-dark text-center">
-                        <h2 class="text-white">Laba Rugi</h2>
+                        <h2 class="text-white">Perubahan Modal</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-5 mb-2">
@@ -89,11 +89,13 @@
             }
             else if ($(this).val() == thisYear) {
                 if (joinMonth == thisMonth) {
+                    console.log('sama');
                     for (let i = joinMonth; i <= thisMonth; i++) {
                         $("#bulan").append(`<option value="${i}">${MONTH[i-1]}</option>`);
                     }
                 }
                 else {
+                    console.log('tak sama');
                     for (let i = 0; i < thisMonth; i++) {
                         $("#bulan").append(`<option value="${i+1}">${MONTH[i]}</option>`);
                     }
@@ -115,7 +117,7 @@
             const tahun = $('#tahun').val();
             const bulan = $('#bulan').val();
             if(tahun && bulan) {
-                window.open(`/laporan/laba-rugi/cetak?tahun=${tahun}&bulan=${bulan}`, '_blank');
+                window.open(`/laporan/perubahan-modal/cetak?tahun=${tahun}&bulan=${bulan}`, '_blank');
             }
             else {
                 Swal.fire({

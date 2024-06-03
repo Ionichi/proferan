@@ -46,7 +46,7 @@
                     <ul class="nav-second-level" aria-expanded="false">
                         <li><a href="/laporan/jurnal-umum">Jurnal Umum</a></li>
                         <li><a href="/laporan/laba-rugi">Laba Rugi</a></li>
-                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="/laporan/perubahan-modal">Perubahan Modal</a></li>
                         <li><a href="#">Coming Soon</a></li>
                     </ul>
                 </li>

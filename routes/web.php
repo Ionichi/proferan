@@ -6,6 +6,7 @@ use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PenyesuaianController;
+use App\Http\Controllers\PerubahanModalController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UtangController;
@@ -85,6 +86,9 @@ Route::middleware('auth')->group(function() {
 
         Route::get('/laba-rugi', [LabaRugiController::class, 'index'])->name('laporan.laba.rugi.view');
         Route::get('/laba-rugi/cetak', [LabaRugiController::class, 'print'])->name('laporan.laba.rugi.print');
+
+        Route::get('/perubahan-modal', [PerubahanModalController::class, 'index'])->name('laporan.perubahan.modal.view');
+        Route::get('/perubahan-modal/cetak', [PerubahanModalController::class, 'print'])->name('laporan.perubahan.modal.print');
     });
 });
 
