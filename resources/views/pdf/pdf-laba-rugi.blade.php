@@ -44,6 +44,9 @@ table {
 .text-center {
     text-align: center;
 }
+.text-left {
+    text-align: left;
+}
 .text-right {
     text-align: right;
 }
@@ -80,7 +83,7 @@ table {
                     </td>
                     <td></td>
                     <td></td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-012']['Penjualan']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-012']['Penjualan']->nominal) }}</td>
                 </tr>
                 <tr>
                     <td>
@@ -89,7 +92,7 @@ table {
                         </span>
                     </td>
                     <td></td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-012']['Potongan Penjualan']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-012']['Potongan Penjualan']->nominal) }}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -99,7 +102,7 @@ table {
                         </span>
                     </td>
                     <td></td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-012']['Retur Penjualan']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-012']['Retur Penjualan']->nominal) }}</td>
                     <td></td>
                 </tr>
             <tr>
@@ -128,7 +131,7 @@ table {
                         </span>
                     </td>
                     <td></td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Pembelian Barang Dagang']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Pembelian Barang Dagang']->nominal) }}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -138,7 +141,7 @@ table {
                         </span>
                     </td>
                     <td></td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Beban Angkut Pembelian']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Beban Angkut Pembelian']->nominal) }}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -147,7 +150,7 @@ table {
                             {{ $data['JK-PFA-2024-013']['Retur Pembelian']->nama }}
                         </span>
                     </td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Retur Pembelian']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Retur Pembelian']->nominal) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -157,7 +160,7 @@ table {
                             {{ $data['JK-PFA-2024-013']['Potongan Pembelian']->nama }}
                         </span>
                     </td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Potongan Pembelian']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-013']['Potongan Pembelian']->nominal) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -213,7 +216,7 @@ table {
                             {{ $data['JK-PFA-2024-016']['Pendapatan Bunga']->nama }}
                         </span>
                     </td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-016']['Pendapatan Bunga']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-016']['Pendapatan Bunga']->nominal) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -223,7 +226,7 @@ table {
                             {{ $data['JK-PFA-2024-016']['Pendapatan Usaha Lain']->nama }}
                         </span>
                     </td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-016']['Pendapatan Usaha Lain']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-016']['Pendapatan Usaha Lain']->nominal) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -233,7 +236,7 @@ table {
                             {{ $data['JK-PFA-2024-016']['Pendapatan Lain-lain']->nama }}
                         </span>
                     </td>
-                    <td class="text-center">{{ "Rp " . number_format($data['JK-PFA-2024-016']['Pendapatan Lain-lain']->nominal) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($data['JK-PFA-2024-016']['Pendapatan Lain-lain']->nominal) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -264,7 +267,7 @@ table {
                     @php
                         $bebanTeleponDanListrik = $data['JK-PFA-2024-014']['Beban Telepon dan Listrik']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanTeleponDanListrik) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanTeleponDanListrik) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -277,7 +280,7 @@ table {
                     @php
                         $bebanAir = $data['JK-PFA-2024-014']['Beban Air']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanAir) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanAir) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -290,7 +293,7 @@ table {
                     @php
                         $bebanPerlengkapanToko = $data['JK-PFA-2024-014']['Beban Perlengkapan Toko']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanPerlengkapanToko) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanPerlengkapanToko) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -303,7 +306,7 @@ table {
                     @php
                         $bebanPeralatanToko = $data['JK-PFA-2024-014']['Beban Peralatan Toko']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanPeralatanToko) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanPeralatanToko) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -316,7 +319,7 @@ table {
                     @php
                         $bebanPenyusutanBangunan = $data['JK-PFA-2024-014']['Beban Penyusutan Bangunan']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanPenyusutanBangunan) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanPenyusutanBangunan) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -329,7 +332,7 @@ table {
                     @php
                         $bebanPenyusutanPeralatan = $data['JK-PFA-2024-014']['Beban Penyusutan Peralatan']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanPenyusutanPeralatan) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanPenyusutanPeralatan) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -342,7 +345,7 @@ table {
                     @php
                         $bebanGajiKaryawan = $data['JK-PFA-2024-014']['Beban Gaji Karyawan']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanGajiKaryawan) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanGajiKaryawan) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -355,7 +358,7 @@ table {
                     @php
                         $bebanIklan = $data['JK-PFA-2024-014']['Beban Iklan']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanIklan) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanIklan) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -368,7 +371,7 @@ table {
                     @php
                         $bebanAdministrasiBank = $data['JK-PFA-2024-014']['Beban Administrasi Bank']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanAdministrasiBank) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanAdministrasiBank) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -381,7 +384,7 @@ table {
                     @php
                         $bebanOperasiLainnya = $data['JK-PFA-2024-014']['Beban Operasi Lainnya']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanOperasiLainnya) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanOperasiLainnya) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -394,7 +397,7 @@ table {
                     @php
                         $bebanAngkutPenjualan = $data['JK-PFA-2024-014']['Beban Angkut Penjualan']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanAngkutPenjualan) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanAngkutPenjualan) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -407,7 +410,7 @@ table {
                     @php
                         $bebanLainLain = $data['JK-PFA-2024-015']['Beban Lain-lain']->nominal;
                     @endphp
-                    <td class="text-center">{{ "Rp " . number_format($bebanLainLain) }}</td>
+                    <td class="text-left">{{ "Rp " . number_format($bebanLainLain) }}</td>
                     <td></td>
                     <td></td>
                 </tr>
