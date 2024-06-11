@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\JurnalUmumController;
 use App\Http\Controllers\LabaRugiController;
+use App\Http\Controllers\NeracaController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PenyesuaianController;
@@ -89,6 +90,9 @@ Route::middleware('auth')->group(function() {
 
         Route::get('/perubahan-modal', [PerubahanModalController::class, 'index'])->name('laporan.perubahan.modal.view');
         Route::get('/perubahan-modal/cetak', [PerubahanModalController::class, 'print'])->name('laporan.perubahan.modal.print');
+
+        Route::get('/neraca', [NeracaController::class, 'index'])->name('laporan.neraca.view');
+        Route::get('/neraca/cetak', [NeracaController::class, 'print'])->name('laporan.neraca.print');
     });
 });
 
