@@ -17,8 +17,8 @@ body {
     margin-bottom: 50px;
     font-size: 18px;
 }
-.namaUsaha {
-    font-size: 32px;
+.namaUsaha, .judulLaporan {
+    font-size: 24px;
     font-weight: bold;
 }
 .sub-title {
@@ -67,7 +67,7 @@ table {
     <div class="header">
         <span class="namaUsaha">{{ $dataUsaha['nama'] }}</span>
         <br>
-        <span><b>Laporan Neraca</b></span>
+        <span class="judulLaporan">Laporan Neraca</span>
         <br>
         <span>Per {{ $dataUsaha['bulan'] }} {{ $dataUsaha['tahun'] }}</span>
     </div>

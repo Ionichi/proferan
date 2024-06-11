@@ -196,7 +196,7 @@
                                             </div>
                                             <h5 class="mb-3">Simple & Easy to Use</h5>
                                             <p class="text-muted">Proferan is an accounting application designed with a focus on simplicity and ease of use. With a simple and intuitive interface, Proferan allows users without a strong accounting background to quickly and easily manage their business finances.</p>
-                                            <p class="text-muted">Kemampuan aplikasi untuk menyajikan informasi keuangan dengan cara yang mudah dipahami membantu pengguna untuk memahami kondisi keuangan usaha mereka secara lebih baik. Dengan demikian, Proferan tidak hanya menjadi alat pencatatan transaksi keuangan, tetapi juga menjadi mitra yang dapat dipercaya bagi pengusaha dalam mengelola keuangan mereka secara efektif.</p>
+                                            <p class="text-muted">The application's ability to present financial information in an easy-to-understand manner helps users better understand the financial condition of their business. In this way, Proferan is not only a tool for recording financial transactions but also a trustworthy partner for entrepreneurs in managing their finances effectively.</p>
                                         </div>
                                         
                                     </div>

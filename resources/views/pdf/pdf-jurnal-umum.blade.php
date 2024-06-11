@@ -17,8 +17,8 @@ body {
     margin-bottom: 50px;
     font-size: 18px;
 }
-.namaUsaha {
-    font-size: 50px;
+.namaUsaha, .judulLaporan {
+    font-size: 24px;
     font-weight: bold;
 }
 table {
@@ -47,7 +47,7 @@ th {
     <div class="header">
         <span class="namaUsaha">{{ $dataUsaha['nama'] }}</span>
         <br>
-        <span>Bukti Jurnal Umum</span>
+        <span class="judulLaporan">Bukti Jurnal Umum</span>
         <br>
         <span>Dari {{ $dataUsaha['startDate'] }} ke {{ $dataUsaha['endDate'] }}</span>
     </div>
