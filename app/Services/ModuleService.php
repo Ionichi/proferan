@@ -16,8 +16,8 @@ class ModuleService
             DB::beginTransaction();
             try {
                 if ($request->jenis_transaksi == 111 || $request->jenis_transaksi == 121 || $request->jenis_transaksi == 122 || $request->jenis_transaksi == 124 || $request->jenis_transaksi == 511) {
-                    $nomor_akun_debit = $request->jenis_transaksi;
                     $nomor_akun_kredit = 311;
+                    $nomor_akun_debit = $request->jenis_transaksi;
                 } else {
                     $nomor_akun_debit = 111;
                     $nomor_akun_kredit = $request->jenis_transaksi;
