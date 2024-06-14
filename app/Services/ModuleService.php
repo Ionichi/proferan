@@ -15,7 +15,7 @@ class ModuleService
         if ($module === 'pemasukan') {
             DB::beginTransaction();
             try {
-                if ($request->jenis_transaksi == 111 || $request->jenis_transaksi == 121 || $request->jenis_transaksi == 122 || $request->jenis_transaksi == 124) {
+                if ($request->jenis_transaksi == 111 || $request->jenis_transaksi == 121 || $request->jenis_transaksi == 122 || $request->jenis_transaksi == 124 || $request->jenis_transaksi == 511) {
                     $nomor_akun_debit = $request->jenis_transaksi;
                     $nomor_akun_kredit = 311;
                 } else {
@@ -404,7 +404,7 @@ class ModuleService
                 $transaksi = Transaksi::where('id', $request->id)->where('user_id', Auth::user()->id)->where('type', 'pemasukan')->firstOrFail();
                 $potongan = Transaksi::where('user_id', Auth::user()->id)->where('keterangan', 'LIKE', "Potongan: ".$transaksi->keterangan)->where('type', 'pemasukan')->first();
 
-                if ($request->jenis_transaksi == 111 || $request->jenis_transaksi == 121 || $request->jenis_transaksi == 122 || $request->jenis_transaksi == 124) {
+                if ($request->jenis_transaksi == 111 || $request->jenis_transaksi == 121 || $request->jenis_transaksi == 122 || $request->jenis_transaksi == 124 || $request->jenis_transaksi == 511) {
                     $nomor_akun_debit = $request->jenis_transaksi;
                     $nomor_akun_kredit = 311;
                 } else {
