@@ -169,7 +169,7 @@ Pengeluaran
             }
             nominal.value = value;
 
-            let formattedValue = new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR', maximumSignificantDigits: 3}).format(value);
+            let formattedValue = "Rp " + new Intl.NumberFormat('id-ID').format(value);
 
             input.value = formattedValue;
         }
