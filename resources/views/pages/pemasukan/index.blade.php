@@ -88,6 +88,7 @@
                                 <option value="121">Pertambahan Modal Tanah</option>
                                 <option value="122">Pertambahan Modal Bangunan</option>
                                 <option value="124">Pertambahan Modal Peralatan</option>
+                                <option value="511">Pertambahan Modal Barang</option>
                             </select>
                         </div>
                         <div class="form-group">
