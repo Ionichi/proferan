@@ -520,8 +520,9 @@ class ModuleService
 
                 $transaksi->user_id = Auth::user()->id;
                 $transaksi->tgl = $request->tgl;
+                $transaksi->nomor_akun_debit = $nomor_akun_debit;
                 $transaksi->nominal_debit = $request->nominal;
-                $transaksi->nomor_akun_kredit = $request->jenis_transaksi;
+                $transaksi->nomor_akun_kredit = $nomor_akun_kredit;
                 $transaksi->nominal_kredit = $request->nominal;
                 $transaksi->keterangan = ucfirst($request->keterangan);
                 $transaksi->save();
