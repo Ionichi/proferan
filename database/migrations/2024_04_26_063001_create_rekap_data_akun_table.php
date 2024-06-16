@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('user_id')->nullable(false);
             $table->string('nama');
             $table->integer('nomor_akun');
-            $table->enum('saldo_normal', array('debit', 'credit'));
+            $table->enum('saldo_normal', array('debit', 'kredit'));
             $table->string('jenis_akun_id')->nullable(false);
             $table->integer('nominal');
             $table->string('periode_bulan');
