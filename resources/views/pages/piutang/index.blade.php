@@ -343,7 +343,7 @@ Piutang
                         Swal.close();
                         resetForm();
                         $('#id').val(response.data.id);
-                        $('#jenis_transaksi').val(response.data.nomor_akun_debit).trigger('change');
+                        $('#jenis_transaksi').val(response.data.nomor_akun_kredit).trigger('change');
                         $('#tgl').val(response.data.tgl);
                         $('#nominalTransaksi').val(response.data.nominal_kredit);
                         $('#keterangan').text(response.data.keterangan);

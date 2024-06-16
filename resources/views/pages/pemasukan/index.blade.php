@@ -339,7 +339,13 @@
                         Swal.close();
                         resetForm();
                         $('#id').val(response.data.id);
-                        $('#jenis_transaksi').val(response.data.nomor_akun_kredit).trigger('change');
+
+                        const NOMOR_ACCOUNT = [411, 112, 421, 513, 422, 423, 111, 121, 122, 124, 511];
+                        if(NOMOR_ACCOUNT.includes(response.data.nomor_akun_kredit))
+                            $('#jenis_transaksi').val(response.data.nomor_akun_kredit).trigger('change');
+                        else 
+                            $('#jenis_transaksi').val(response.data.nomor_akun_debit).trigger('change');
+                        
                         $('#tgl').val(response.data.tgl);
                         $('#nominalTransaksi').val(response.data.nominal_debit);
                         $('#keterangan').text(response.data.keterangan);
