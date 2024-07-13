@@ -2,6 +2,7 @@
 @section('title')
     Pemasukan
 @endsection
+
 @section('styles')
     {{-- Datatable --}}
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -29,6 +30,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -123,6 +125,7 @@
         </div>
     </div>
 @endsection
+
 @section('scripts')
     {{-- Datatable --}}
     <script src="{{ asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
@@ -158,6 +161,7 @@
 
             input.value = formattedValue;
         }
+
         const resetForm = () => {
             $('#formPemasukan')[0].reset();
             $('#modalPemasukanTitle').text('Form Pemasukan');

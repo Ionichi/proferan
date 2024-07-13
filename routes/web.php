@@ -11,6 +11,8 @@ use App\Http\Controllers\PerubahanModalController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UtangController;
+use App\Http\Controllers\AdminberitaController;
+use App\Http\Controllers\AdminlainController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +26,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Models\Berita;
+use App\Models\Adminlain;
 
 Route::get('/', function () {
-    return view('index');
+    $berita = Berita::orderBy('created_at', 'desc')->get();
+    $adminLain = Adminlain::orderBy('id', 'asc')->get(); // Menambahkan data adminlain
+    return view('index', ['berita' => $berita, 'adminLain' => $adminLain]);
 });
 
 // Authentication
@@ -104,3 +110,17 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
         return view('pages.dashboard.index');
     });
 });
+
+Route::get('/berita', [AdminberitaController::class, 'index'])->name('berita.index');
+Route::post('/berita/store', [AdminberitaController::class, 'createUpdate'])->name('berita.store');
+Route::get('/berita/edit/{id}', [AdminberitaController::class, 'edit'])->name('berita.edit');
+Route::post('/berita/destroy', [AdminberitaController::class, 'destroy'])->name('berita.destroy');
+Route::get('/berita/table', [AdminberitaController::class, 'table'])->name('berita.table');
+
+Route::get('/adminlain', [AdminlainController::class, 'index'])->name('adminlain.index');
+Route::get('/adminlain/edit/{id}', [AdminlainController::class, 'edit'])->name('adminlain.edit');
+Route::get('/adminlain/table', [AdminlainController::class, 'table'])->name('adminlain.table');
+// Route::post('/adminlain/update/{id}', [AdminlainController::class, 'update'])->name('adminlain.update'); // Ganti push dengan put
+Route::put('/adminlain/update/{id}', [AdminlainController::class, 'update'])->name('adminlain.update');
+
+
