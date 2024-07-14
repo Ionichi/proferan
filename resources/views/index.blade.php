@@ -66,6 +66,9 @@
                             <a href="#features" class="nav-link">Features</a>
                         </li>
                         <li class="nav-item">
+                            <a href="#visi_misi" class="nav-link">Visi & Misi</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#information" class="nav-link">Information</a>
                         </li>
                         <li class="nav-item">
@@ -234,6 +237,51 @@
         </section>
         <!-- features end -->
 
+        <section class="section bg-light" id="visi_misi">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="title text-center mb-4">
+                            <h6 class="text-primary small-title">Our Visi & Misi</h6>
+                            <h4>Our Visi & Misi</h4>
+                            <hr class="text-muted">
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="p-4 mt-4 text-center">
+                            <div class="mb-4">
+                                <img src="{{ asset('assets/images/visi_misi.png') }}" alt="" style="width: 100% !important;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        @php
+                            $visi_misi = App\Models\VisiMisi::first();
+                            $berita = App\Models\Berita::all();
+                            $kontak = App\Models\Kontak::first();
+                        @endphp
+                        <div class="p-4 mt-4">
+                            <div class="mb-4">
+                                <h3>Visi</h3>
+                                <p>{{ $visi_misi->visi }}</p>
+                            </div>
+                        </div>
+                        <div class="p-4 mt-4">
+                            <div class="mb-4">
+                                <h3>Misi</h3>
+                                <p>{{ $visi_misi->misi }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </section>
+
         <!-- Information start -->
         <section class="section" id="information">
             <div class="container-fluid">
@@ -249,44 +297,26 @@
                 <div class="row">
                     <div id="carouselExampleCaptions" class="carousel slide col-12" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                            @foreach($berita as $key => $loop_berita)
+                                <li data-target="#carouselExampleCaptions" data-slide-to="{{ $key }}" class="@if($key == 0) active @endif"></li>
+                            @endforeach
                         </ol>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="image-container">
+                        @forelse ($berita as $key => $loop_berita)
+                            <div class="carousel-item @if($key == 0) active @endif">
+                                <div class="image-container" onclick="window.open('{{ $loop_berita->link }}')" style="cursor: pointer;">
                                     <div class="shadow-overlay"></div>
-                                    <img src="{{ asset('assets/landing/images/demo/demo-4.jpg') }}" class="d-block w-100" alt="...">
+                                    <img src="{{ asset('assets/images/berita/'.$loop_berita->gambar) }}" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-caption d-none d-md-block bg-dark">
-                                    <h5>First slide label</h5>
-                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                    <h5 onclick="window.open('{{ $loop_berita->link }}')" style="cursor: pointer;">{{ $loop_berita->judul }}</h5>
+                                    <p>{{ Str::limit($loop_berita->deskripsi, 150,'...') }}</p>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <div class="image-container">
-                                    <div class="shadow-overlay"></div>
-                                    <img src="{{ asset('assets/landing/images/demo/demo-5.jpg') }}" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-caption d-none d-md-block bg-dark">
-                                    <h5>Second slide label</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="image-container">
-                                    <div class="shadow-overlay"></div>
-                                    <img src="{{ asset('assets/landing/images/demo/demo-6.jpg') }}" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-caption d-none d-md-block bg-dark">
-                                    <h5>Third slide label</h5>
-                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                                </div>
-                            </div>
+                        @empty
+                            <h4>Tidak ada berita terbaru</h4>
+                        @endforelse  
                         </div>
-
-
                         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
@@ -395,7 +425,7 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">E-mail</h5>
-                                    <p class="text-muted">example@gmail.com</p>
+                                    <p class="text-muted">{{ $kontak->email }}</p>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -404,7 +434,7 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">Phone</h5>
-                                    <p class="text-muted">012-345-6789</p>
+                                    <p class="text-muted">{{ $kontak->phone }}</p>
                                 </div>
                             </div>
                             <div class="mb-2">
@@ -413,7 +443,7 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">Address</h5>
-                                    <p class="text-muted">20 Rollins Road Cotesfield, NE 68829</p>
+                                    <p class="text-muted">{{ $kontak->alamat }}</p>
                                 </div>
                             </div>
                         </div>
@@ -526,6 +556,5 @@
 
         <!-- custom js -->
         <script src="{{ asset('assets/landing/js/app.js') }}"></script>
-
     </body>
 </html>

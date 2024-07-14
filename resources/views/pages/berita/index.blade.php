@@ -48,6 +48,7 @@
                                 <th class="align-middle">Judul</th>
                                 <th class="align-middle">Deskripsi</th>
                                 <th class="align-middle">Tanggal</th>
+                                <th class="align-middle">Link</th>
                                 <th class="align-middle">Gambar</th>
                                 <th class="align-middle">Status</th>
                                 <th class="align-middle">Action</th>
@@ -85,6 +86,10 @@
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="link">Link</label>
+                            <input type="text" name="link" id="link" class="form-control" placeholder="Masukkan link berita" required>
                         </div>
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
@@ -147,9 +152,18 @@
                 },
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
-                    { data: 'judul', name: 'judul' },
-                    { data: 'deskripsi', name: 'deskripsi' },
+                    { data: 'judul',
+                        render: function ( data, type, row ) {
+                            return '<span style="text-wrap: wrap;">' + data + "</span>";
+                        }
+                    },
+                    { data: 'deskripsi',
+                        render: function ( data, type, row ) {
+                            return '<span style="text-wrap: wrap;">' + data + "</span>";
+                        }
+                    },
                     { data: 'tanggal', name: 'tanggal' },
+                    { data: 'link', name: 'link' },
                     { data: 'gambar', name: 'gambar' },
                     { data: 'status', name: 'status' },
                     { data: 'action', name: 'action' },
@@ -264,6 +278,7 @@
                         $('#judul').val(response.data.judul);
                         $('#deskripsi').val(response.data.deskripsi);
                         $('#tanggal').val(response.data.tanggal);
+                        $('#link').val(response.data.link);
                         var lokasi_foto = "{{ asset('storage/berita/') }}"+'/'+response.data.gambar;
                         var dropify = $("#gambar").dropify({ messages: { default: "Drag and drop a your profile picture here or click", replace: "Drag and drop or click to replace", remove: "Remove", error: "Ooops, something wrong appended." }, error: { fileSize: "Ukuran foto terlalu besar (Maksimal 5MB)" }, });
                         dropify = dropify.data('dropify');

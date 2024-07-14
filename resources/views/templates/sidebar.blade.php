@@ -49,6 +49,12 @@
                             <span> Berita </span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/admin/kontak">
+                            <i class="fas fa-edit"></i>
+                            <span> Kontak </span>
+                        </a>
+                    </li>
                 @else
                     <li class="menu-title">Reports</li>
                     <li>

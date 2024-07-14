@@ -1,6 +1,6 @@
 @extends('templates.main')
 @section('title')
-    Visi & Misi
+    Kontak
 @endsection
 @section('styles')
     {{-- Datatable --}}
@@ -35,23 +35,24 @@
             <div class="col-12">
                 <div class="card-box">
                     <div class="card-header mb-3 bg-dark">
-                        <h2 class="text-white">Tabel Visi & Misi</h2>
+                        <h2 class="text-white">Tabel Kontak</h2>
                     </div>
                     <div class="add">
                         @php
-                            $visi_misi = App\Models\VisiMisi::first();
+                            $kontak = App\Models\Kontak::first();
                         @endphp
-                        @if(!$visi_misi)
-                            <button type="button" class="btn btn-success waves-effect width-md waves-light rounded float-right" data-toggle="modal" data-target="#modalVisiMisi">Tambah Visi & Misi</button>
+                        @if(!$kontak)
+                            <button type="button" class="btn btn-success waves-effect width-md waves-light rounded float-right" data-toggle="modal" data-target="#modalKontak">Tambah Kontak</button>
                             <br><br><br>
                         @endif
                     </div>
-                    <table id="tableVisiMisi" class="table table-bordered dt-responsive nowrap table-striped" width="100%">
+                    <table id="tableKontak" class="table table-bordered dt-responsive nowrap table-striped" width="100%">
                         <thead class="thead-dark">
                             <tr class="text-center">
                                 <th class="align-middle" style="max-width: 5%;">No</th>
-                                <th class="align-middle">Visi</th>
-                                <th class="align-middle">Misi</th>
+                                <th class="align-middle">Email</th>
+                                <th class="align-middle">Telepon</th>
+                                <th class="align-middle">Alamat</th>
                                 <th class="align-middle">Action</th>
                             </tr>
                         </thead>
@@ -63,30 +64,34 @@
     </div>
 
     {{-- modals --}}
-    <div class="modal fade" id="modalVisiMisi" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalVisiMisiTitle" aria-hidden="true">
+    <div class="modal fade" id="modalKontak" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalKontakTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modalPemasukanTitle">Form Visi & Misi</h4>
+                    <h4 class="modal-title" id="modalKontakTitle">Form Kontak</h4>
                     <button type="button" id="cancel" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formVisiMisi" method="POST">
+                    <form id="formKontak" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="visi">Visi</label>
+                            <label for="email">Email</label>
                             <input type="hidden" name="id" id="id">
-                            <textarea name="visi" id="visi" class="form-control" cols="30" rows="5" required placeholder="Masukkan Visi"></textarea>
+                            <input type="email" name="email" id="email" class="form-control" required placeholder="Masukkan Email">
                         </div>
                         <div class="form-group">
-                            <label for="misi">Misi</label>
-                            <textarea name="misi" id="misi" class="form-control" cols="30" rows="5" required placeholder="Masukkan Misi"></textarea>
+                            <label for="telepon">Telepon</label>
+                            <input type="text" name="telepon" id="telepon" class="form-control" required placeholder="Masukkan Nomor Telepon">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" name="alamat" id="alamat" class="form-control" required placeholder="Masukkan Alamat">
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <button type="submit" id="saveVisiMisi" class="btn btn-success">Simpan</button>
+                            <button type="submit" id="saveKontak" class="btn btn-success">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -116,21 +121,22 @@
     <script>
         // =================== methods ===================
         const resetForm = () => {
-            $('#formVisiMisi')[0].reset();
-            $('#modalVisiMisiTitle').text('Form Visi & Misi');
+            $('#formKontak')[0].reset();
+            $('#modalKontakTitle').text('Form Kontak');
             $('#id').val('');
-            $('#visi').text('');
-            $('#misi').text('');
+            $('#email').text('');
+            $('#telepon').text('');
+            $('#alamat').text('');
         }
 
-        const tableVisiMisi = (query = '') => {
-            $('#tableVisiMisi').DataTable({
+        const tableKontak = (query = '') => {
+            $('#tableKontak').DataTable({
                 processing: true,
                 info: true,
                 responsive: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('visi_misi.table') }}",
+                    url: "{{ route('kontak.table') }}",
                     method: 'GET',
                     data: {
                         query: query,
@@ -138,8 +144,9 @@
                 },
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
-                    { data: 'visi', name: 'visi' },
-                    { data: 'misi', name: 'misi' },
+                    { data: 'email', name: 'email' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'alamat', name: 'alamat' },
                     { data: 'action', name: 'action' },
                 ],
                 columnDefs: [
@@ -159,7 +166,7 @@
             });
 
             // init table
-            tableVisiMisi();
+            tableKontak();
         });
         // =================== end initialization ===================
 
@@ -168,10 +175,10 @@
             resetForm();
         });
 
-        $("#formVisiMisi").submit(function(event) {
+        $("#formKontak").submit(function(event) {
             event.preventDefault();
             $.ajax({
-                url: "{{ route('visi_misi.storeOrUpdate') }}",
+                url: "{{ route('kontak.storeOrUpdate') }}",
                 method: 'POST',
                 data: new FormData(this),
                 contentType: false,
@@ -215,8 +222,8 @@
                             confirmButtonText: 'Oke',
                         });
                         if(response.code == 200) {
-                            $('#tableVisiMisi').DataTable().ajax.reload(null, false);
-                            $('#modalVisiMisi').modal('hide');
+                            $('#tableKontak').DataTable().ajax.reload(null, false);
+                            $('#modalKontak').modal('hide');
                             $('.add').empty();
                             resetForm();
                         }
@@ -228,7 +235,7 @@
         $(document).on('click', '#edit', function() {
             const id = $(this).data('id');
             $.ajax({
-                url: `/admin/visi-misi/edit/${id}`,
+                url: `/admin/kontak/edit/${id}`,
                 method: 'GET',
                 beforeSend: function() {
                     Swal.fire({
@@ -246,11 +253,12 @@
                         Swal.close();
                         resetForm();
                         $('#id').val(response.data.id);
-                        $('#visi').val(response.data.visi);
-                        $('#misi').val(response.data.misi);
+                        $('#email').val(response.data.email);
+                        $('#telepon').val(response.data.phone);
+                        $('#alamat').val(response.data.alamat);
 
-                        $('#modalVisiMisiTitle').text('Form Edit Visi & Misi');
-                        $('#modalVisiMisi').modal('show');
+                        $('#modalKontakTitle').text('Form Edit Kontak');
+                        $('#modalKontak').modal('show');
                     } else {
                         Swal.fire({
                             title: 'Gagal!',
@@ -263,52 +271,52 @@
             });
         });
 
-        $(document).on('click', '#delete', function() {
-            const id = $(this).data('id');
-            Swal.fire({
-                title: 'Konfirmasi!',
-                text: 'Yakin ingin menghapus data visi misi?',
-                type: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'Batal',
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus data!',
-            }).then((result) => {
-                if(result.value) {
-                    $.ajax({
-                        url: "{{ route('visi_misi.hapus') }}",
-                        method: "POST",
-                        data: {
-                            id: id,
-                        },
-                        beforeSend: function() {
-                            Swal.fire({
-                                title: `<div style="width: 80px; height: 80px;" class="spinner-border text-info m-2" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>`,
-                                text: 'Loading...',
-                                customClass: 'swal-loading',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                            });
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                title: (response.code == 200) ? 'Berhasil!' : 'Gagal!',
-                                text: response.message,
-                                type: response.status,
-                                confirmButtonText: 'Oke',
-                            });
-                            $('.add').html(`
-                                <button type="button" class="btn btn-success waves-effect width-md waves-light rounded float-right" data-toggle="modal" data-target="#modalVisiMisi">Tambah Visi & Misi</button>
-                                <br><br><br>
-                            `);
-                            $('#tableVisiMisi').DataTable().ajax.reload(null, false);
-                        }
-                    });
-                }
-            });
-        });
+        // $(document).on('click', '#delete', function() {
+        //     const id = $(this).data('id');
+        //     Swal.fire({
+        //         title: 'Konfirmasi!',
+        //         text: 'Yakin ingin menghapus data kontak?',
+        //         type: 'warning',
+        //         showCancelButton: true,
+        //         cancelButtonText: 'Batal',
+        //         confirmButtonColor: '#d33',
+        //         confirmButtonText: 'Ya, hapus data!',
+        //     }).then((result) => {
+        //         if(result.value) {
+        //             $.ajax({
+        //                 url: "{{ route('kontak.hapus') }}",
+        //                 method: "POST",
+        //                 data: {
+        //                     id: id,
+        //                 },
+        //                 beforeSend: function() {
+        //                     Swal.fire({
+        //                         title: `<div style="width: 80px; height: 80px;" class="spinner-border text-info m-2" role="status">
+        //                             <span class="sr-only">Loading...</span>
+        //                         </div>`,
+        //                         text: 'Loading...',
+        //                         customClass: 'swal-loading',
+        //                         showConfirmButton: false,
+        //                         allowOutsideClick: false,
+        //                     });
+        //                 },
+        //                 success: function(response) {
+        //                     Swal.fire({
+        //                         title: (response.code == 200) ? 'Berhasil!' : 'Gagal!',
+        //                         text: response.message,
+        //                         type: response.status,
+        //                         confirmButtonText: 'Oke',
+        //                     });
+        //                     $('.add').html(`
+        //                         <button type="button" class="btn btn-success waves-effect width-md waves-light rounded float-right" data-toggle="modal" data-target="#modalVisiMisi">Tambah Visi & Misi</button>
+        //                         <br><br><br>
+        //                     `);
+        //                     $('#tableKontak').DataTable().ajax.reload(null, false);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
         // =================== end actions ===================
     </script>
 @endsection

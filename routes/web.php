@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\JurnalUmumController;
+use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\NeracaController;
 use App\Http\Controllers\PemasukanController;
@@ -122,5 +123,13 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
         Route::post('/hapus', [BeritaController::class, 'hapus'])->name('berita.hapus');
         Route::get('/edit/{id}', [BeritaController::class, 'edit'])->name('berita.edit');
         Route::post('/ubah-status', [BeritaController::class, 'ubah_status'])->name('berita.ubah_status');
+    });
+
+    Route::prefix('kontak')->group(function() {
+        Route::get('/', [KontakController::class, 'index'])->name('kontak.index');
+        Route::get('/table', [KontakController::class, 'table'])->name('kontak.table');
+        Route::post('/storeOrUpdate', [KontakController::class,'storeOrUpdate'])->name('kontak.storeOrUpdate');
+        // Route::post('/hapus', [KontakController::class, 'hapus'])->name('kontak.hapus');
+        Route::get('/edit/{id}', [KontakController::class, 'edit'])->name('kontak.edit');
     });
 });
