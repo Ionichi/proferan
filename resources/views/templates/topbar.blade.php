@@ -32,25 +32,20 @@
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <!-- item-->
                 <div class="dropdown-header noti-title">
-                    <h6 class="text-overflow m-0">Welcome !</h6>
+                    <h6 class="text-overflow m-0">
+                        Welcome !
+                        @if (Auth::guard('admin')->check())
+                            {{ Auth::guard('admin')->user()->fullname }}
+                        @else
+                            {{ Auth::user()->fullname }}
+                        @endif
+                    </h6>
                 </div>
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="fe-user"></i>
-                    <span>My Account</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="fe-settings"></i>
-                    <span>Settings</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="fe-lock"></i>
-                    <span>Lock Screen</span>
+                    <i class="fas fa-key"></i>
+                    <span>Change Password</span>
                 </a>
 
                 <div class="dropdown-divider"></div>
@@ -74,12 +69,6 @@
                     </form>
                 @endif
             </div>
-        </li>
-
-        <li class="dropdown notification-list">
-            <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
-                <i class="fe-settings noti-icon"></i>
-            </a>
         </li>
 
 
