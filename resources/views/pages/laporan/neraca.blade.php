@@ -117,7 +117,7 @@
             const tahun = $('#tahun').val();
             const bulan = $('#bulan').val();
             if(tahun && bulan) {
-                window.open(`/laporan/neraca/cetak?tahun=${tahun}&bulan=${bulan}`, '_blank');
+                window.open(`/laporan/neraca/cetak?tahun=${tahun}&bulan=${bulan}`);
             }
             else {
                 Swal.fire({

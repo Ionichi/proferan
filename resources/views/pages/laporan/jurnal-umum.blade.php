@@ -67,7 +67,7 @@
             const endDate = $('#endDate').val();
             if(startDate && endDate) {
                 if(startDate <= endDate) {
-                    window.open(`/laporan/jurnal-umum/cetak?startDate=${startDate}&endDate=${endDate}`, '_blank');
+                    window.open(`/laporan/jurnal-umum/cetak?startDate=${startDate}&endDate=${endDate}`);
                 } else {
                     Swal.fire({
                         title: 'Gagal!',
