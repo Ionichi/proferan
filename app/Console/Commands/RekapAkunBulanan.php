@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\MasterAkun;
 use App\Models\RekapDataAkun;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class RekapAkunBulanan extends Command
@@ -100,6 +101,9 @@ class RekapAkunBulanan extends Command
                     $rekap->periode_bulan = $data->periode_bulan;
                     $rekap->periode_tahun = $data->periode_tahun;
                     $rekap->save();
+
+                    $data->periode_bulan = Carbon::now()->locale('id')->settings(['formatFunction' => 'translatedFormat'])->format('F');
+                    $data->periode_tahun = date('Y');
     
                     // to 0 on account type 11 - 16
                     for ($i = 11; $i <= 16; $i++) {
