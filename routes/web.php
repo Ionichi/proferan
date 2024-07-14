@@ -105,7 +105,7 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
     Route::post('/logout', [LoginController::class, 'logout_admin'])->name('auth.admin.logout');
 
     Route::get('/dashboard', function() {
-        return view('pages.dashboard.index');
+        return view('pages.dashboard.admin');
     });
 
     Route::prefix('visi-misi')->group(function() {

@@ -519,6 +519,7 @@
                             <ul class="list-inline footer-list text-center mt-5">
                                 <li class="list-inline-item"><a href="#">Home</a></li>
                                 <li class="list-inline-item"><a href="#features">Features</a></li>
+                                <li class="list-inline-item"><a href="#visi_misi">Visi & Misi</a></li>
                                 <li class="list-inline-item"><a href="#information">Information</a></li>
                                 <li class="list-inline-item"><a href="#our_team">Our Team</a></li>
                                 <li class="list-inline-item"><a href="#contact">Contact</a></li>
