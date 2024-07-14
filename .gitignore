@@ -16,8 +16,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-
 .vercel
-/api
-.vercelignore
-vercel.json
