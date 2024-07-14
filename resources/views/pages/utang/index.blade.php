@@ -90,8 +90,8 @@ Utang
                             <option value="211">Retur Pembelian (Pembelian Kredit)</option>
                             <option value="522">Utang Telepon atau Listrik</option>
                             <option value="523">Utang Air</option>
-                            <option value="524">Utang Perlengkapan Toko</option>
-                            <option value="525">Utang Peralatan Toko</option>
+                            <option value="113">Utang Perlengkapan Toko</option>
+                            <option value="124">Utang Peralatan Toko</option>
                             <option value="528">Utang Gaji Karyawan</option>
                             <option value="529">Utang Iklan</option>
                             <option value="530">Utang Administrasi Bank</option>
