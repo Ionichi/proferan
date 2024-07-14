@@ -5,10 +5,13 @@
         <title>
             @yield('title') | Proferan - Professional Federation Accounting
         </title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="WebApp for help UMKM to create simple financial statements" name="description" />
         <meta content="Proferam Team" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
@@ -38,30 +41,31 @@
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
-            @yield('content')
+            <div class="content-page">
+                <div class="content">
+                    @yield('content')
+                </div>
+            </div>
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->
 
+            <!-- Footer Start -->
+            @include('templates.footer')
+            <!-- Footer End -->
+
         </div>
         <!-- END wrapper -->
+        
 
-        @yield('scripts')
         <!-- Vendor js -->
         <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-
+        
         <!-- knob plugin -->
         <script src="{{ asset('assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
-
-        <!--Morris Chart-->
-        <script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script>
-        <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
-
-        <!-- Dashboard init js-->
-        <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
-
+        
         <!-- App js -->
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
-        
+        @yield('scripts')
     </body>
 </html>

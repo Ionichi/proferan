@@ -2,8 +2,13 @@
 
 namespace App\Console;
 
+use App\Console\Commands\RekapAkunBulanan;
+use App\Console\Commands\RekapAkunMonthly;
+use App\Models\MasterAkun;
+use App\Models\RekapDataAkun;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->job(new RekapAkunBulanan)->monthly();
     }
 
     /**

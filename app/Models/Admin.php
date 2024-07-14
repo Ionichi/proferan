@@ -10,7 +10,7 @@ class Admin extends Authenticatable
 {
     use HasFactory, HasUuids;
     protected $table = 'admins';
-    protected $guard = ['admin'];
+    protected $guarded = [''];
 
     /**
      * The attributes that are mass assignable.

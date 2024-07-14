@@ -1,8 +1,19 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\JurnalUmumController;
+use App\Http\Controllers\LabaRugiController;
+use App\Http\Controllers\NeracaController;
+use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\PenyesuaianController;
+use App\Http\Controllers\PerubahanModalController;
+use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\UtangController;
+use App\Http\Controllers\AdminberitaController;
+use App\Http\Controllers\AdminlainController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +26,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Models\Berita;
+use App\Models\Adminlain;
 
 Route::get('/', function () {
-    return view('index');
+    $berita = Berita::orderBy('created_at', 'desc')->get();
+    $adminLain = Adminlain::orderBy('id', 'asc')->get(); // Menambahkan data adminlain
+    return view('index', ['berita' => $berita, 'adminLain' => $adminLain]);
 });
 
 // Authentication
@@ -40,8 +55,52 @@ Route::middleware('auth')->group(function() {
     Route::get('/dashboard', function() {
         return view('pages.dashboard.index');
     });
-});
 
+    Route::get('/pemasukan', [PemasukanController::class, 'index'])->name('pemasukan.view');
+    Route::get('/pemasukan/table', [PemasukanController::class, 'table'])->name('pemasukan.table');
+    Route::post('/pemasukan', [PemasukanController::class, 'createUpdate'])->name('pemasukan.createUpdate');
+    Route::get('/pemasukan/edit/{id}', [PemasukanController::class, 'edit'])->name('pemasukan.edit');
+    Route::post('/pemasukan/destroy', [PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
+
+    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran.view');
+    Route::get('/pengeluaran/table', [PengeluaranController::class, 'table'])->name('pengeluaran.table');
+    Route::post('/pengeluaran', [PengeluaranController::class, 'createUpdate'])->name('pengeluaran.createUpdate');
+    Route::get('/pengeluaran/edit/{id}', [PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
+    Route::post('/pengeluaran/destroy', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
+
+    Route::get('/utang', [UtangController::class, 'index'])->name('utang.view');
+    Route::get('/utang/table', [UtangController::class, 'table'])->name('utang.table');
+    Route::post('/utang', [UtangController::class, 'createUpdate'])->name('utang.createUpdate');
+    Route::get('/utang/edit/{id}', [UtangController::class, 'edit'])->name('utang.edit');
+    Route::post('/utang/destroy', [UtangController::class, 'destroy'])->name('utang.destroy');
+
+    Route::get('/piutang', [PiutangController::class, 'index'])->name('piutang.view');
+    Route::get('/piutang/table', [PiutangController::class, 'table'])->name('piutang.table');
+    Route::post('/piutang', [PiutangController::class, 'createUpdate'])->name('piutang.createUpdate');
+    Route::get('/piutang/edit/{id}', [PiutangController::class, 'edit'])->name('piutang.edit');
+    Route::post('/piutang/destroy', [PiutangController::class, 'destroy'])->name('piutang.destroy');
+
+    Route::get('/penyesuaian', [PenyesuaianController::class, 'index'])->name('penyesuaian.view');
+    Route::get('/penyesuaian/table', [PenyesuaianController::class, 'table'])->name('penyesuaian.table');
+    Route::post('/penyesuaian', [PenyesuaianController::class, 'createUpdate'])->name('penyesuaian.createUpdate');
+    Route::get('/penyesuaian/edit/{id}', [PenyesuaianController::class, 'edit'])->name('penyesuaian.edit');
+    Route::post('/penyesuaian/destroy', [PenyesuaianController::class, 'destroy'])->name('penyesuaian.destroy');
+
+
+    Route::prefix('laporan')->group(function() {
+        Route::get('/jurnal-umum', [JurnalUmumController::class, 'index'])->name('laporan.jurnal.umum.view');
+        Route::get('/jurnal-umum/cetak', [JurnalUmumController::class, 'print'])->name('laporan.jurnal.umum.print');
+
+        Route::get('/laba-rugi', [LabaRugiController::class, 'index'])->name('laporan.laba.rugi.view');
+        Route::get('/laba-rugi/cetak', [LabaRugiController::class, 'print'])->name('laporan.laba.rugi.print');
+
+        Route::get('/perubahan-modal', [PerubahanModalController::class, 'index'])->name('laporan.perubahan.modal.view');
+        Route::get('/perubahan-modal/cetak', [PerubahanModalController::class, 'print'])->name('laporan.perubahan.modal.print');
+
+        Route::get('/neraca', [NeracaController::class, 'index'])->name('laporan.neraca.view');
+        Route::get('/neraca/cetak', [NeracaController::class, 'print'])->name('laporan.neraca.print');
+    });
+});
 
 // Admin Panel
 Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
@@ -52,7 +111,16 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
     });
 });
 
-Route::get('/pemasukkan', [FormController::class, 'pemasukkan'])->name('form.pemasukkan');
-Route::get('/pengeluaran', [FormController::class, 'pengeluaran'])->name('form.pemasukkan');
-Route::get('/utang', [FormController::class, 'utang'])->name('form.utang');
-Route::get('/piutang', [FormController::class, 'piutang'])->name('form.piutang');
+Route::get('/berita', [AdminberitaController::class, 'index'])->name('berita.index');
+Route::post('/berita/store', [AdminberitaController::class, 'createUpdate'])->name('berita.store');
+Route::get('/berita/edit/{id}', [AdminberitaController::class, 'edit'])->name('berita.edit');
+Route::post('/berita/destroy', [AdminberitaController::class, 'destroy'])->name('berita.destroy');
+Route::get('/berita/table', [AdminberitaController::class, 'table'])->name('berita.table');
+
+Route::get('/adminlain', [AdminlainController::class, 'index'])->name('adminlain.index');
+Route::get('/adminlain/edit/{id}', [AdminlainController::class, 'edit'])->name('adminlain.edit');
+Route::get('/adminlain/table', [AdminlainController::class, 'table'])->name('adminlain.table');
+// Route::post('/adminlain/update/{id}', [AdminlainController::class, 'update'])->name('adminlain.update'); // Ganti push dengan put
+Route::put('/adminlain/update/{id}', [AdminlainController::class, 'update'])->name('adminlain.update');
+
+

@@ -42,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function master_akun()
+    {
+        return $this->hasMany(MasterAkun::class);
+    }
+
+    public function rekap_data_akun()
+    {
+        return $this->hasMany(RekapDataAkun::class);
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
+
+    public function log_error()
+    {
+        return $this->hasMany(LogError::class);
+    }
 }

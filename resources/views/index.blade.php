@@ -8,6 +8,7 @@
     <meta content="WebApp for help UMKM to create simple financial statements" name="description" />
     <meta content="Proferam Team" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/landing/images/favicon.ico') }}">
@@ -120,112 +121,49 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="nav nav-pills nav-justified features-tab mb-5" id="pills-tab" role="tablist">
+                        @foreach($adminLain as $index => $item)
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-code-tab" data-toggle="pill" href="#pills-code" role="tab" aria-controls="pills-code" aria-selected="true">
+                            <a class="nav-link {{ $index === 0 ? 'active' : '' }}" id="pills-{{ $item->id }}-tab" data-toggle="pill" href="#pills-{{ $item->id }}" role="tab" aria-controls="pills-{{ $item->id }}" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
                                 <div class="clearfix">
                                     <div class="features-icon float-right">
-                                        <i class="pe-7s-notebook h1"></i>
+                                        <i class="pe-7s-{{ $item->id === 1 ? 'notebook' : ($item->id === 2 ? 'edit' : 'headphones') }} h1"></i>
                                     </div>
                                     <div class="d-none d-lg-block mr-4">
-                                        <h5>User Manual Book</h5>
-                                        <p>Provides guidance how to use</p>
+                                        <h5>{{ $item->judul }}</h5>
+                                        <p>{{ $item->subjudul }}</p>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-customize-tab" data-toggle="pill" href="#pills-customize" role="tab" aria-controls="pills-customize" aria-selected="false">
-                                <div class="clearfix">
-                                    <div class="features-icon float-right">
-                                        <i class="pe-7s-edit h1"></i>
-                                    </div>
-                                    <div class="d-none d-lg-block mr-4">
-                                        <h5>Simple & Easy to Use</h5>
-                                        <p>Friendly User Interface</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-support-tab" data-toggle="pill" href="#pills-support" role="tab" aria-controls="pills-support" aria-selected="false">
-                                <div class="features-icon float-right">
-                                    <i class="pe-7s-headphones h1"></i>
-                                </div>
-                                <div class="d-none d-lg-block mr-4">
-                                    <h5>Awesome Support</h5>
-                                    <p>For Micro and Small Enterprises</p>
-                                </div>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade" id="pills-code" role="tabpanel" aria-labelledby="pills-code-tab">
+                        @foreach($adminLain as $index => $item)
+                        <div class="tab-pane fade {{ $index === 0 ? 'show active' : '' }}" id="pills-{{ $item->id }}" role="tabpanel" aria-labelledby="pills-{{ $item->id }}-tab">
                             <div class="row align-items-center justify-content-center">
                                 <div class="col-lg-4 col-sm-6">
                                     <div>
-                                        <img src="{{ asset('assets/landing/images/features-img/img-1.png') }}" alt="" class="img-fluid mx-auto d-block">
+                                        <img src="{{ asset('assets/landing/images/features-img/img-' . ($index + 1) . '.png') }}" alt="" class="img-fluid mx-auto d-block">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 offset-lg-1">
                                     <div>
                                         <div class="feature-icon mb-4">
-                                            <i class="pe-7s-notebook h1 text-primary"></i>
+                                            <i class="pe-7s-{{ $item->id === 1 ? 'notebook' : ($item->id === 2 ? 'edit' : 'headphones') }} h1 text-primary"></i>
                                         </div>
-                                        <h5 class="mb-3">User Manual Book</h5>
-                                        <p class="text-muted">The Proferan manual aims to provide users with an understanding of how to use financial reports to make better business decisions. With clear and practical explanations, users are given insight into how to analyze the financial information available in the report, such as whether they should still take on additional debt or not.</p>
-                                        <p class="text-muted">This helps users make smarter, fact-based financial decisions, thereby increasing the likelihood of their business success. In this way, the user manual serves not only as a technical guide, but also as a valuable source of knowledge to support users in managing their business more effectively.</p>
+                                        <h5 class="mb-3">{{ $item->judul }}</h5>
+                                        <p class="text-muted">{{ $item->keterangan }}</p>
+                                        @if($item->file)
                                         <div class="mt-4">
-                                            <a href="#" class="btn btn-custom">Download PDF <i class="mdi mdi-cloud-download ml-1"></i></a>
+                                            <a href="{{ Storage::url($item->file) }}" class="btn btn-custom" download>Download<i class="mdi mdi-cloud-download ml-1"></i></a>
                                         </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!-- end row -->
-                        </div>
-                        <div class="tab-pane fades how active" id="pills-customize" role="tabpanel" aria-labelledby="pills-customize-tab">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-lg-4 col-sm-6">
-                                    <div>
-                                        <img src="{{ asset('assets/landing/images/features-img/img-2.png') }}" alt="" class="img-fluid mx-auto d-block">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 offset-lg-1">
-                                    <div>
-                                        <div class="feature-icon mb-4">
-                                            <i class="pe-7s-edit h1 text-primary"></i>
-                                        </div>
-                                        <h5 class="mb-3">Simple & Easy to Use</h5>
-                                        <p class="text-muted">Proferan is an accounting application designed with a focus on simplicity and ease of use. With a simple and intuitive interface, Proferan allows users without a strong accounting background to quickly and easily manage their business finances.</p>
-                                        <p class="text-muted">Kemampuan aplikasi untuk menyajikan informasi keuangan dengan cara yang mudah dipahami membantu pengguna untuk memahami kondisi keuangan usaha mereka secara lebih baik. Dengan demikian, Proferan tidak hanya menjadi alat pencatatan transaksi keuangan, tetapi juga menjadi mitra yang dapat dipercaya bagi pengusaha dalam mengelola keuangan mereka secara efektif.</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- end row -->
-                        </div>
-                        <div class="tab-pane fade" id="pills-support" role="tabpanel" aria-labelledby="pills-support-tab">
-
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-lg-4 col-sm-6">
-                                    <div>
-                                        <img src="{{ asset('assets/landing/images/features-img/img-3.png') }}" alt="" class="img-fluid mx-auto d-block">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 offset-lg-1">
-                                    <div>
-                                        <div class="feature-icon mb-4">
-                                            <i class="pe-7s-headphones h1 text-primary"></i>
-                                        </div>
-                                        <h5 class="mb-3">Awesome Support for MSMEs</h5>
-                                        <p class="text-muted">Proferan provides targeted financial reporting solutions for micro and small businesses, enabling users to carefully track and understand their finances better. With reports tailored to the scale and needs of their business, users can easily monitor cash flow, evaluate performance, and make more informed decisions based on accurate and relevant information. It helps users in managing their finances with efficiency and increases the chances of success of their business.</p>
-                                        <p class="text-muted">With Proferan, users can have the right tools to better manage their finances, without having to worry about the complexity or mismatch of financial reports with their business needs.</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <!-- end row -->
                         </div>
+                        @endforeach
                     </div>
                     <!-- end tab-content -->
                 </div>
@@ -251,43 +189,25 @@
             <div class="row">
                 <div id="carouselExampleCaptions" class="carousel slide col-12" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        @foreach($berita as $key => $item)
+                        <li data-target="#carouselExampleCaptions" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+                        @endforeach
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        @foreach($berita as $key => $item)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                             <div class="image-container">
                                 <div class="shadow-overlay"></div>
-                                <img src="{{ asset('assets/landing/images/demo/demo-4.jpg') }}" class="d-block w-100" alt="...">
+                                <img src="{{ $item->gambar }}" class="d-block w-100" alt="{{ $item->judul }}">
                             </div>
                             <div class="carousel-caption d-none d-md-block bg-dark">
-                                <h5>First slide label</h5>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                <h5>{{ $item->judul }}</h5>
+                                <p>{{ $item->keterangan }}</p>
+                                <a href="{{ $item->link }}" class="btn btn-primary" target="_blank">Klik Disini</a>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <div class="image-container">
-                                <div class="shadow-overlay"></div>
-                                <img src="{{ asset('assets/landing/images/demo/demo-5.jpg') }}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-caption d-none d-md-block bg-dark">
-                                <h5>Second slide label</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="image-container">
-                                <div class="shadow-overlay"></div>
-                                <img src="{{ asset('assets/landing/images/demo/demo-6.jpg') }}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-caption d-none d-md-block bg-dark">
-                                <h5>Third slide label</h5>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-
 
                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -319,7 +239,7 @@
             </div>
             <!-- end row -->
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="testi-box p-4 bg-white mt-4 text-center">
                         <p class="text-muted mb-4">" The designer of this theme delivered a quality product. I am not a front-end developer and I hate when the theme I download has glitches or needs minor tweaks here and there. This worked for my needs just out of the boxes. Also, it is fast and elegant."</p>
                         <div class="testi-img mb-4">
@@ -334,7 +254,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="testi-box p-4 bg-white mt-4 text-center">
                         <p class="text-muted mb-4">" Extremely well designed and the documentation is very well done. Super happy with the purchase and definitely recommend this! "</p>
                         <div class="testi-img mb-4">
@@ -342,21 +262,6 @@
                         </div>
                         <p class="text-muted mb-1"> - Fullstack Developer</p>
                         <h5 class="font-18">Feryandi</h5>
-
-                        <div class="testi-icon">
-                            <i class="mdi mdi-format-quote-open display-2"></i>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testi-box p-4 bg-white mt-4 text-center">
-                        <p class="text-muted mb-4">" We used this theme to save some design time but... wow it has everything you didn't realize you would need later. I highly recommend this template to get your web design headed in the right direction quickly. "</p>
-                        <div class="testi-img mb-4">
-                            <img src="{{ asset('assets/landing/images/testi/img-3.png') }}" alt="" class="rounded-circle img-thumbnail">
-                        </div>
-                        <p class="text-muted mb-1"> - User Testing</p>
-                        <h5 class="font-18">Alexander</h5>
 
                         <div class="testi-icon">
                             <i class="mdi mdi-format-quote-open display-2"></i>
