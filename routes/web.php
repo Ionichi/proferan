@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\JurnalUmumController;
 use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\NeracaController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\PerubahanModalController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UtangController;
+use App\Http\Controllers\VisiMisiController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -46,9 +49,9 @@ Route::prefix('auth')->middleware('guest')->group(function() {
 Route::middleware('auth')->group(function() {
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
     
-    Route::get('/dashboard', function() {
-        return view('pages.dashboard.index');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/data-assets', [DashboardController::class, 'dataAssets'])->name('dashboard.dataAssets');
+    Route::get('/dashboard/data-liability', [DashboardController::class, 'dataLiability'])->name('dashboard.dataLiability');
 
     Route::get('/pemasukan', [PemasukanController::class, 'index'])->name('pemasukan.view');
     Route::get('/pemasukan/table', [PemasukanController::class, 'table'])->name('pemasukan.table');
@@ -102,5 +105,22 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
 
     Route::get('/dashboard', function() {
         return view('pages.dashboard.index');
+    });
+
+    Route::prefix('visi-misi')->group(function() {
+        Route::get('/', [VisiMisiController::class, 'index'])->name('visi_misi.index');
+        Route::get('/table', [VisiMisiController::class, 'table'])->name('visi_misi.table');
+        Route::post('/storeOrUpdate', [VisiMisiController::class, 'storeOrUpdate'])->name('visi_misi.storeOrUpdate');
+        Route::post('/hapus', [VisiMisiController::class, 'hapus'])->name('visi_misi.hapus');
+        Route::get('/edit/{id}', [VisiMisiController::class, 'edit'])->name('visi_misi.edit');
+    });
+
+    Route::prefix('berita')->group(function() {
+        Route::get('/', [BeritaController::class, 'index'])->name('berita.index');
+        Route::get('/table', [BeritaController::class, 'table'])->name('berita.table');
+        Route::post('/storeOrUpdate', [BeritaController::class, 'storeOrUpdate'])->name('berita.storeOrUpdate');
+        Route::post('/hapus', [BeritaController::class, 'hapus'])->name('berita.hapus');
+        Route::get('/edit/{id}', [BeritaController::class, 'edit'])->name('berita.edit');
+        Route::post('/ubah-status', [BeritaController::class, 'ubah_status'])->name('berita.ubah_status');
     });
 });
