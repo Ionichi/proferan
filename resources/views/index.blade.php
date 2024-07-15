@@ -266,13 +266,15 @@
                         <div class="p-4 mt-4">
                             <div class="mb-4">
                                 <h3>Visi</h3>
-                                <p>{{ $visi_misi->visi }}</p>
+                                <p>
+                                    {{ (!empty($visi_misi)) ? $visi_misi->visi : 'No data' }}
+                                </p>
                             </div>
                         </div>
                         <div class="p-4 mt-4">
                             <div class="mb-4">
                                 <h3>Misi</h3>
-                                <p>{{ $visi_misi->misi }}</p>
+                                <p>{{ (!empty($visi_misi)) ? $visi_misi->misi : 'No data' }}</p>
                             </div>
                         </div>
                     </div>
@@ -425,7 +427,9 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">E-mail</h5>
-                                    <p class="text-muted">{{ $kontak->email }}</p>
+                                    <p class="text-muted">
+                                        {{ (!empty($kontak)) ? $kontak->email : 'No data' }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -434,7 +438,7 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">Phone</h5>
-                                    <p class="text-muted">{{ $kontak->phone }}</p>
+                                    <p class="text-muted">{{ (!empty($kotak)) ? $kontak->phone : 'No data' }}</p>
                                 </div>
                             </div>
                             <div class="mb-2">
@@ -443,7 +447,7 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">Address</h5>
-                                    <p class="text-muted">{{ $kontak->alamat }}</p>
+                                    <p class="text-muted">{{ (!empty($kontak)) ? $kontak->alamat : 'No data' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -451,7 +455,7 @@
                     <div class="col-lg-8">
                         <div class="custom-form bg-white">
                             <div id="message"></div>
-                            <form method="post" action="#" name="contact-form" id="contact-form">
+                            <form method="post" action="mailto:proferan24@gmail.com" name="contact-form" id="contact-form" enctype="text/plain">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
