@@ -89,13 +89,11 @@
             }
             else if ($(this).val() == thisYear) {
                 if (joinMonth == thisMonth) {
-                    console.log('sama');
                     for (let i = joinMonth; i <= thisMonth; i++) {
                         $("#bulan").append(`<option value="${i}">${MONTH[i-1]}</option>`);
                     }
                 }
                 else {
-                    console.log('tak sama');
                     for (let i = 0; i < thisMonth; i++) {
                         $("#bulan").append(`<option value="${i+1}">${MONTH[i]}</option>`);
                     }
