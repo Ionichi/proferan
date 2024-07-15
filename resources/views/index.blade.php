@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('assets/landing/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="{{ asset('assets/landing/css/bootstrap.min.css') }}" type="text/css">
@@ -316,8 +316,10 @@
                                 </div>
                             </div>
                         @empty
-                            <h4>Tidak ada berita terbaru</h4>
-                        @endforelse  
+                            <div class="text-center">
+                                <p>No data</p>
+                            </div>
+                        @endforelse
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -349,11 +351,11 @@
                 </div>
                 <!-- end row -->
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="testi-box p-4 bg-white mt-4 text-center">
                             <p class="text-muted mb-4">" The designer of this theme delivered a quality product. I am not a front-end developer and I hate when the theme I download has glitches or needs minor tweaks here and there. This worked for my needs just out of the boxes. Also, it is fast and elegant."</p>
                             <div class="testi-img mb-4">
-                                <img src="{{ asset('assets/landing/images/testi/img-1.png') }}" alt="" class="rounded-circle img-thumbnail">
+                                <img src="{{ asset('assets/images/andreas.jpeg') }}" alt="" class="rounded-circle img-thumbnail">
                             </div>
                             <p class="text-muted mb-1"> - Project Manager</p>
                             <h5 class="font-18">Andreas Kevin</h5>
@@ -364,29 +366,14 @@
                            
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="testi-box p-4 bg-white mt-4 text-center">
                             <p class="text-muted mb-4">"  Extremely well designed and the documentation is very well done. Super happy with the purchase and definitely recommend this! "</p>
                             <div class="testi-img mb-4">
-                                <img src="{{ asset('assets/landing/images/testi/img-2.png') }}" alt="" class="rounded-circle img-thumbnail">
+                                <img src="{{ asset('assets/images/feryandi.jpeg') }}" alt="" class="rounded-circle img-thumbnail">
                             </div>
                             <p class="text-muted mb-1"> - Fullstack Developer</p>
                             <h5 class="font-18">Feryandi</h5>
-                            
-                            <div class="testi-icon">
-                                <i class="mdi mdi-format-quote-open display-2"></i>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="testi-box p-4 bg-white mt-4 text-center">
-                            <p class="text-muted mb-4">"  We used this theme to save some design time but... wow it has everything you didn't realize you would need later. I highly recommend this template to get your web design headed in the right direction quickly.  "</p>
-                            <div class="testi-img mb-4">
-                                <img src="{{ asset('assets/landing/images/testi/img-3.png') }}" alt="" class="rounded-circle img-thumbnail">
-                            </div>
-                            <p class="text-muted mb-1"> - User Testing</p>
-                            <h5 class="font-18">Alexander</h5>
                             
                             <div class="testi-icon">
                                 <i class="mdi mdi-format-quote-open display-2"></i>
