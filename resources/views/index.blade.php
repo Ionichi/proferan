@@ -176,7 +176,7 @@
                                             <p class="text-muted">The Proferan manual aims to provide users with an understanding of how to use financial reports to make better business decisions. With clear and practical explanations, users are given insight into how to analyze the financial information available in the report, such as whether they should still take on additional debt or not.</p>
                                             <p class="text-muted">This helps users make smarter, fact-based financial decisions, thereby increasing the likelihood of their business success. In this way, the user manual serves not only as a technical guide, but also as a valuable source of knowledge to support users in managing their business more effectively.</p>
                                             <div class="mt-4">
-                                                <a href="#" class="btn btn-custom">Download PDF <i class="mdi mdi-cloud-download ml-1"></i></a>
+                                                <a href="{{ asset('assets/pdf/Buku Manual - Ref 2.pdf') }}" class="btn btn-custom">Download PDF <i class="mdi mdi-cloud-download ml-1"></i></a>
                                             </div>
                                         </div>
                                         

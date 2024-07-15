@@ -55,11 +55,6 @@ class KontakController extends BaseController
         return $this->sendResponse([], 'Data ' . $message, 'success', 200);
     }
 
-    // public function hapus(Request $request) {
-    //     $data = Kontak::where('id', $request->id)->delete();
-    //     return $this->sendResponse([], 'Data berhasil dihapus', 'success', 200);
-    // }
-
     public function edit($id) {
         try {
             $data = Kontak::find($id);

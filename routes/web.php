@@ -129,7 +129,6 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function() {
         Route::get('/', [KontakController::class, 'index'])->name('kontak.index');
         Route::get('/table', [KontakController::class, 'table'])->name('kontak.table');
         Route::post('/storeOrUpdate', [KontakController::class,'storeOrUpdate'])->name('kontak.storeOrUpdate');
-        // Route::post('/hapus', [KontakController::class, 'hapus'])->name('kontak.hapus');
         Route::get('/edit/{id}', [KontakController::class, 'edit'])->name('kontak.edit');
     });
 });

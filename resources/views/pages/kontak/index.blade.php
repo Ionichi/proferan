@@ -270,53 +270,6 @@
                 }
             });
         });
-
-        // $(document).on('click', '#delete', function() {
-        //     const id = $(this).data('id');
-        //     Swal.fire({
-        //         title: 'Konfirmasi!',
-        //         text: 'Yakin ingin menghapus data kontak?',
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         cancelButtonText: 'Batal',
-        //         confirmButtonColor: '#d33',
-        //         confirmButtonText: 'Ya, hapus data!',
-        //     }).then((result) => {
-        //         if(result.value) {
-        //             $.ajax({
-        //                 url: "{{ route('kontak.hapus') }}",
-        //                 method: "POST",
-        //                 data: {
-        //                     id: id,
-        //                 },
-        //                 beforeSend: function() {
-        //                     Swal.fire({
-        //                         title: `<div style="width: 80px; height: 80px;" class="spinner-border text-info m-2" role="status">
-        //                             <span class="sr-only">Loading...</span>
-        //                         </div>`,
-        //                         text: 'Loading...',
-        //                         customClass: 'swal-loading',
-        //                         showConfirmButton: false,
-        //                         allowOutsideClick: false,
-        //                     });
-        //                 },
-        //                 success: function(response) {
-        //                     Swal.fire({
-        //                         title: (response.code == 200) ? 'Berhasil!' : 'Gagal!',
-        //                         text: response.message,
-        //                         type: response.status,
-        //                         confirmButtonText: 'Oke',
-        //                     });
-        //                     $('.add').html(`
-        //                         <button type="button" class="btn btn-success waves-effect width-md waves-light rounded float-right" data-toggle="modal" data-target="#modalVisiMisi">Tambah Visi & Misi</button>
-        //                         <br><br><br>
-        //                     `);
-        //                     $('#tableKontak').DataTable().ajax.reload(null, false);
-        //                 }
-        //             });
-        //         }
-        //     });
-        // });
         // =================== end actions ===================
     </script>
 @endsection
