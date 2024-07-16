@@ -138,8 +138,16 @@
                 },
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
-                    { data: 'visi', name: 'visi' },
-                    { data: 'misi', name: 'misi' },
+                    { data: 'visi',
+                        render: function ( data, type, row ) {
+                            return '<span style="text-wrap: wrap;">' + data + "</span>";
+                        }
+                    },
+                    { data: 'misi',
+                        render: function ( data, type, row ) {
+                            return '<span style="text-wrap: wrap;">' + data + "</span>";
+                        }
+                    },
                     { data: 'action', name: 'action' },
                 ],
                 columnDefs: [
