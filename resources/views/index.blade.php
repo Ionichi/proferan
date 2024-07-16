@@ -425,7 +425,7 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h5 class="font-16 mb-0">Phone</h5>
-                                    <p class="text-muted">{{ (!empty($kotak)) ? $kontak->phone : 'No data' }}</p>
+                                    <p class="text-muted">{{ (!empty($kontak)) ? $kontak->phone : 'No data' }}</p>
                                 </div>
                             </div>
                             <div class="mb-2">
