@@ -33,6 +33,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/advance-kalkulator', function() {
+    return view('templates/advance-kalkulator');
+});
+Route::get('/normal-kalkulator', function() {
+    return view('templates/normal-kalkulator');
+});
+
 // Authentication
 Route::prefix('auth')->middleware('guest')->group(function() {
     Route::get('/login', [LoginController::class, 'index'])->name('auth.login.view');

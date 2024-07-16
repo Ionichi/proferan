@@ -22,6 +22,8 @@
         <!-- App Css-->
         <link href="{{ asset('assets/css/app.min.css') }}" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
+        <link rel="stylesheet" href="{{ asset('assets/css/floating-kalkulator-button.css') }}">
+
         @yield('styles')
     </head>
 
@@ -44,6 +46,50 @@
             <div class="content-page">
                 <div class="content">
                     @yield('content')
+
+                    <div class="fab">
+                        <i class="fa fa-plus"></i>
+                    </div>
+
+                    <div class="box">
+                        <button class="item btn-calculator-normal" data-toggle="modal" data-target="#normal-kalkulator">
+                            <i class="fa fa-calculator"></i>
+                        </button>
+                        <button class="item btn-calculator-advance" data-toggle="modal" data-target="#advance-kalkulator">
+                            <i class="mdi mdi-calculator-variant"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal fade" id="normal-kalkulator" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog">
+                                <div class="modal-contents">
+                                    <div class="modal-body-edit">
+                                        <div class="modal-body-edit">
+                                            <div class="iframe1">
+                                                <iframe src="/normal-kalkulator" frameborder="0" width="100%" height="600px"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="advance-kalkulator" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog">
+                                <div class="modal-contents">
+                                    <div class="modal-body-edit">
+                                        <div class="modal-body-edit">
+                                            <div class="iframe1">
+                                                <iframe src="/advance-kalkulator" frameborder="0" width="100%" height="600px"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -67,5 +113,19 @@
         <!-- App js -->
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
         @yield('scripts')
+
+        <script>
+            document.querySelector('.fab').addEventListener('click', function(e) {
+                document.querySelector('.box').classList.toggle('box-active');
+                document.querySelector('.fab').classList.toggle('fab-active');
+            });
+            
+            window.addEventListener('message', function(event) {
+                if (event.data === 'close-modal') {
+                    $('#advance-kalkulator').modal('hide');
+                    $('#normal-kalkulator').modal('hide');
+                }
+            });
+        </script>
     </body>
 </html>
