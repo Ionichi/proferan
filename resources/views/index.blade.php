@@ -357,7 +357,7 @@
                             <div class="testi-img mb-4">
                                 <img src="{{ asset('assets/images/andreas.jpeg') }}" alt="" class="rounded-circle img-thumbnail">
                             </div>
-                            <p class="text-muted mb-1"> - Project Manager</p>
+                            <p class="text-muted mb-1"> - Accounting</p>
                             <h5 class="font-18">Andreas Kevin</h5>
                             
                             <div class="testi-icon">
