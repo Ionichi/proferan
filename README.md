@@ -1,6 +1,6 @@
 <p align="center">
   <picture>
-    <img alt="Proferan" src="./public/assets/images/logo-light.png" width="20%">
+    <img alt="Proferan" src="./public/assets/images/logo.png" width="10%">
   </picture>
 </p>
 
