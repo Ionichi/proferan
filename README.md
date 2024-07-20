@@ -1,3 +1,19 @@
+<p align="center">
+  <picture>
+    <img alt="Proferan" src="./public/assets/images/logo-light.png" width="20%">
+  </picture>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/stars/ionichi/proferan?style=flat-square"/>
+  <img alt="GitHub" src="https://img.shields.io/static/v1?label=license&message=MIT&color=c850c1&style=flat-square">
+  <img src="https://img.shields.io/static/v1?label=website&message=proferan.vercel.app&color=ea1a72&style=flat-square"/>
+</p>
+
+<p align="center">
+Professional Federation Accounting
+</p>
+
 # Professional Federation Accounting
 
 Preview Demo (staging): https://proferan.vercel.app :rocket:
